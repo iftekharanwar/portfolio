@@ -281,10 +281,7 @@ function ProjectItem({
             isHovered ? 'translate-x-4' : 'translate-x-0'
           }`}>
             <span className="text-gold font-bold tracking-wider">VIEW PROJECT</span>
-            <div className={`w-16 h-px bg-gold transition-all duration-500 ${
-              isHovered ? 'w-32' : 'w-16'
-            }`} />
-            <div className={`text-gold transition-transform duration-500 ${
+            <div className={`text-gold text-2xl transition-transform duration-500 ${
               isHovered ? 'translate-x-2' : 'translate-x-0'
             }`}>
               →

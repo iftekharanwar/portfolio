@@ -46,7 +46,7 @@ export default function Footer() {
                 className="text-4xl md:text-5xl font-bold text-cream group-hover:text-gold-light transition-colors duration-300"
                 style={{ fontFamily: 'var(--font-cursive)' }}
               >
-                Your Name
+                Iftekhar Anwar
               </h3>
             </a>
             <p className="text-cream/60 text-lg leading-relaxed max-w-md">
@@ -105,7 +105,7 @@ export default function Footer() {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-cream/50 text-sm">
-            © {currentYear} Your Name. All rights reserved.
+            © {currentYear} Iftekhar Anwar. All rights reserved.
           </p>
 
           <div className="flex items-center gap-8">

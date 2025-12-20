@@ -3,6 +3,7 @@ import { Playfair_Display, Cormorant, Inter } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
+import { Toaster } from "react-hot-toast";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -23,8 +24,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Creative Designer & Developer | Premium Portfolio",
-  description: "Award-winning designer and developer crafting premium digital experiences with stunning animations and elegant design.",
+  title: "Iftekhar Anwar | Creative Designer & Developer",
+  description: "Iftekhar Anwar - Creative designer and developer crafting premium digital experiences with stunning animations and elegant design.",
 };
 
 export default function RootLayout({
@@ -39,6 +40,7 @@ export default function RootLayout({
         <SmoothScroll>
           {children}
         </SmoothScroll>
+        <Toaster position="bottom-right" />
       </body>
     </html>
   );

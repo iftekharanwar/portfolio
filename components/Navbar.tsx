@@ -51,14 +51,11 @@ export default function Navbar() {
             className="group flex items-center gap-3"
             data-cursor-hover
           >
-            <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center text-gold-dark font-bold text-xl group-hover:scale-110 transition-transform duration-300">
-              P
-            </div>
             <span
-              className="text-2xl font-bold text-cream tracking-tight hidden md:block"
+              className="text-2xl font-bold text-cream tracking-tight group-hover:text-gold-light transition-colors duration-300"
               style={{ fontFamily: 'var(--font-cursive)' }}
             >
-              Portfolio
+              Iftekhar Anwar
             </span>
           </a>
 

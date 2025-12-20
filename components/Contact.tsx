@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
+import toast from 'react-hot-toast';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,6 +17,7 @@ export default function Contact() {
     message: '',
   });
   const [focused, setFocused] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -65,10 +67,62 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Add your form submission logic here
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://formspree.io/f/mpqapldz', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        toast.success('Message sent successfully! I\'ll get back to you soon.', {
+          duration: 5000,
+          style: {
+            background: '#C9A961',
+            color: '#1a1612',
+            fontWeight: 'bold',
+            padding: '16px 24px',
+            fontSize: '16px',
+          },
+          iconTheme: {
+            primary: '#1a1612',
+            secondary: '#F5F1E8',
+          },
+        });
+
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          message: '',
+        });
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      toast.error('Oops! Something went wrong. Please try again.', {
+        duration: 5000,
+        style: {
+          background: '#C9A961',
+          color: '#1a1612',
+          fontWeight: 'bold',
+          padding: '16px 24px',
+          fontSize: '16px',
+        },
+        iconTheme: {
+          primary: '#dc2626',
+          secondary: '#F5F1E8',
+        },
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -184,15 +238,28 @@ export default function Contact() {
             {/* Submit Button */}
             <motion.button
               type="submit"
-              className="group relative w-full py-6 bg-gold text-gold-dark font-bold text-lg tracking-wider overflow-hidden"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              disabled={isSubmitting}
+              className="group relative w-full py-6 bg-gold text-gold-dark font-bold text-lg tracking-wider overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
+              whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+              whileTap={!isSubmitting ? { scale: 0.98 } : {}}
             >
-              <span className="relative z-10">SEND MESSAGE</span>
+              <span className="relative z-10">
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-3">
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    SENDING...
+                  </span>
+                ) : (
+                  'SEND MESSAGE'
+                )}
+              </span>
               <motion.div
                 className="absolute inset-0 bg-gold-light"
                 initial={{ x: '-100%' }}
-                whileHover={{ x: 0 }}
+                whileHover={!isSubmitting ? { x: 0 } : {}}
                 transition={{ duration: 0.3 }}
               />
             </motion.button>
