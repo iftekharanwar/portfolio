@@ -46,18 +46,6 @@ export default function Contact() {
         ease: 'power3.out',
       });
 
-      // Contact info cards
-      gsap.from('.contact-card', {
-        scrollTrigger: {
-          trigger: '.contact-cards',
-          start: 'top 80%',
-        },
-        y: 60,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: 'power3.out',
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -150,15 +138,12 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="max-w-3xl mx-auto">
           {/* Contact Form */}
-          <motion.form
+          <form
             ref={formRef}
             onSubmit={handleSubmit}
             className="space-y-8"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
           >
             {/* Name Field */}
             <div className="relative">
@@ -239,7 +224,7 @@ export default function Contact() {
             <motion.button
               type="submit"
               disabled={isSubmitting}
-              className="group relative w-full py-6 bg-gold text-gold-dark font-bold text-lg tracking-wider overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
+              className="group relative w-full py-6 bg-gold hover:bg-gold-light text-gold-dark font-bold text-lg tracking-wider overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed transition-colors duration-300"
               whileHover={!isSubmitting ? { scale: 1.02 } : {}}
               whileTap={!isSubmitting ? { scale: 0.98 } : {}}
             >
@@ -256,85 +241,8 @@ export default function Contact() {
                   'SEND MESSAGE'
                 )}
               </span>
-              <motion.div
-                className="absolute inset-0 bg-gold-light"
-                initial={{ x: '-100%' }}
-                whileHover={!isSubmitting ? { x: 0 } : {}}
-                transition={{ duration: 0.3 }}
-              />
             </motion.button>
-          </motion.form>
-
-          {/* Contact Information */}
-          <div className="contact-cards space-y-6">
-            {/* Email Card */}
-            <div className="contact-card group relative p-8 bg-cream/5 backdrop-blur-sm border border-cream/10 hover:border-gold-light transition-all duration-300">
-              <div className="flex items-start gap-6">
-                <div className="w-16 h-16 bg-gold rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-8 h-8 text-gold-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-gold-light text-sm tracking-wider uppercase mb-2">EMAIL</h3>
-                  <a href="mailto:hello@yourname.com" className="text-cream text-xl hover:text-gold-light transition-colors">
-                    hello@yourname.com
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Phone Card */}
-            <div className="contact-card group relative p-8 bg-cream/5 backdrop-blur-sm border border-cream/10 hover:border-gold-light transition-all duration-300">
-              <div className="flex items-start gap-6">
-                <div className="w-16 h-16 bg-gold rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-8 h-8 text-gold-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-gold-light text-sm tracking-wider uppercase mb-2">PHONE</h3>
-                  <a href="tel:+1234567890" className="text-cream text-xl hover:text-gold-light transition-colors">
-                    +1 (234) 567-8900
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Location Card */}
-            <div className="contact-card group relative p-8 bg-cream/5 backdrop-blur-sm border border-cream/10 hover:border-gold-light transition-all duration-300">
-              <div className="flex items-start gap-6">
-                <div className="w-16 h-16 bg-gold rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-8 h-8 text-gold-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-gold-light text-sm tracking-wider uppercase mb-2">LOCATION</h3>
-                  <p className="text-cream text-xl">
-                    New York, NY<br />United States
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Social Links */}
-            <div className="contact-card p-8 bg-cream/5 backdrop-blur-sm border border-cream/10">
-              <h3 className="text-gold-light text-sm tracking-wider uppercase mb-6">FOLLOW ME</h3>
-              <div className="flex gap-4">
-                {['LinkedIn', 'Twitter', 'GitHub', 'Dribbble'].map((social, index) => (
-                  <a
-                    key={index}
-                    href="#"
-                    className="w-12 h-12 rounded-full border-2 border-cream/20 hover:border-gold-light flex items-center justify-center text-cream hover:text-gold-light transition-all duration-300 hover:scale-110"
-                  >
-                    <span className="text-xs font-bold">{social[0]}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
 
