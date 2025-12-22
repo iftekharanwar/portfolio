@@ -149,11 +149,21 @@ export default function Hero() {
               </p>
 
               <div className="flex gap-6 mt-8">
-                <button className="group px-8 py-4 bg-gold text-gold-dark font-bold tracking-wider hover:bg-gold-light transition-all duration-300 relative overflow-hidden">
+                <button
+                  onClick={() => {
+                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="group px-8 py-4 bg-gold text-gold-dark font-bold tracking-wider hover:bg-gold-light transition-all duration-300 relative overflow-hidden"
+                >
                   <span className="relative z-10">VIEW WORK</span>
                   <div className="absolute inset-0 bg-cream transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                 </button>
-                <button className="px-8 py-4 border-2 border-cream text-cream font-bold tracking-wider hover:bg-cream hover:text-gold-dark transition-all duration-300">
+                <button
+                  onClick={() => {
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="px-8 py-4 border-2 border-cream text-cream font-bold tracking-wider hover:bg-cream hover:text-gold-dark transition-all duration-300"
+                >
                   CONTACT
                 </button>
               </div>
@@ -166,7 +176,7 @@ export default function Hero() {
               ref={imageMaskRef}
               className="absolute inset-0 bg-cover bg-center"
               style={{
-                backgroundImage: 'url(https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop)',
+                backgroundImage: 'url(/images/hero/profile-main.png)',
                 clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
                 maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
               }}

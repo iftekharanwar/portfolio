@@ -83,8 +83,8 @@ export default function About() {
               <div className="relative h-[700px]">
                 <div className="absolute inset-0 overflow-hidden">
                   <Image
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop"
-                    alt="About"
+                    src="/images/about/profile-portrait.png"
+                    alt="Iftekhar Anwar - Creative Designer & Developer"
                     fill
                     className="object-cover"
                     sizes="50vw"
@@ -109,8 +109,8 @@ export default function About() {
               <div className="absolute -bottom-12 left-12 w-64 h-64 hidden lg:block">
                 <div className="relative w-full h-full overflow-hidden border-8 border-gold-dark">
                   <Image
-                    src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=400&fit=crop"
-                    alt="Detail"
+                    src="/images/about/workspace.png"
+                    alt="Iftekhar's workspace"
                     fill
                     className="object-cover"
                     sizes="25vw"
@@ -195,10 +195,14 @@ export default function About() {
 
               {/* CTA */}
               <div className="about-text-line">
-                <button className="group px-10 py-5 bg-gold text-gold-dark font-bold text-sm tracking-wider hover:bg-gold-light transition-all duration-300 relative overflow-hidden">
+                <a
+                  href="/cv.pdf"
+                  download
+                  className="group inline-block px-10 py-5 bg-gold text-gold-dark font-bold text-sm tracking-wider hover:bg-gold-light transition-all duration-300 relative overflow-hidden"
+                >
                   <span className="relative z-10">DOWNLOAD CV</span>
                   <div className="absolute inset-0 bg-cream transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                </button>
+                </a>
               </div>
             </div>
           </div>

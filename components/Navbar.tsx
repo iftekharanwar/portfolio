@@ -28,21 +28,24 @@ export default function Navbar() {
   }, []);
 
   const menuItems = [
-    { label: 'WORK', href: '#work' },
+    { label: 'WORK', href: '#projects' },
     { label: 'ABOUT', href: '#about' },
     { label: 'PROCESS', href: '#process' },
     { label: 'CONTACT', href: '#contact' },
   ];
 
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? 'py-4 bg-gold-dark/95 backdrop-blur-lg shadow-2xl'
-            : 'py-6 bg-transparent'
-        }`}
+        className="relative z-50 py-6 bg-transparent"
       >
         <div className="max-w-[95%] mx-auto flex items-center justify-between">
           {/* Logo */}
@@ -76,6 +79,7 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <button
+            onClick={() => scrollToSection('#contact')}
             className="hidden lg:block group px-6 py-3 bg-gold text-gold-dark font-bold text-sm tracking-wider hover:bg-gold-light transition-all duration-300 relative overflow-hidden"
             data-cursor-hover
           >
@@ -133,6 +137,10 @@ export default function Navbar() {
           ))}
 
           <button
+            onClick={() => {
+              setIsMenuOpen(false);
+              setTimeout(() => scrollToSection('#contact'), 300);
+            }}
             className="mt-8 px-12 py-4 bg-gold text-gold-dark font-bold text-lg tracking-wider hover:bg-gold-light transition-all duration-300"
             style={{
               transitionDelay: isMenuOpen ? `${menuItems.length * 0.1}s` : '0s',

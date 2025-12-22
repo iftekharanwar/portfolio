@@ -4,52 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
+import Link from 'next/link';
+import { projects } from '@/data/projects';
 
 gsap.registerPlugin(ScrollTrigger);
-
-interface Project {
-  id: number;
-  title: string;
-  category: string;
-  year: string;
-  description: string;
-  image: string;
-}
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: 'LUNAR LUXURY',
-    category: 'E-COMMERCE',
-    year: '2024',
-    description: 'Next-gen shopping experience with immersive 3D product views',
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=800&fit=crop',
-  },
-  {
-    id: 2,
-    title: 'NOIR IDENTITY',
-    category: 'BRANDING',
-    year: '2024',
-    description: 'Bold visual system for avant-garde fashion house',
-    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=1200&fit=crop',
-  },
-  {
-    id: 3,
-    title: 'AURORA APP',
-    category: 'MOBILE',
-    year: '2024',
-    description: 'Wellness platform with AI-powered personalization',
-    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1000&h=1000&fit=crop',
-  },
-  {
-    id: 4,
-    title: 'VOGUE DIGITAL',
-    category: 'EDITORIAL',
-    year: '2023',
-    description: 'Interactive magazine reimagined for the digital age',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&h=800&fit=crop',
-  },
-];
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -87,7 +45,7 @@ export default function Projects() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-32 px-6 md:px-12 bg-cream overflow-hidden">
+    <section id="projects" ref={sectionRef} className="relative py-32 px-6 md:px-12 bg-cream overflow-hidden">
       {/* Decorative background text */}
       <div className="absolute top-1/4 left-0 text-[20vw] font-bold text-gold/5 pointer-events-none whitespace-nowrap"
            style={{ fontFamily: 'var(--font-cursive)' }}>
@@ -145,7 +103,7 @@ function ProjectItem({
   onHover,
   onLeave,
 }: {
-  project: Project;
+  project: any;
   index: number;
   isHovered: boolean;
   onHover: () => void;
@@ -210,14 +168,15 @@ function ProjectItem({
   const isEven = index % 2 === 0;
 
   return (
-    <div
-      ref={itemRef}
-      className="project-item relative group cursor-pointer"
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
-      data-cursor-hover
-    >
-      <div className={`grid lg:grid-cols-2 gap-12 items-center ${!isEven ? 'lg:grid-flow-dense' : ''}`}>
+    <Link href={`/projects/${project.slug}`}>
+      <div
+        ref={itemRef}
+        className="project-item relative group cursor-pointer"
+        onMouseEnter={onHover}
+        onMouseLeave={onLeave}
+        data-cursor-hover
+      >
+        <div className={`grid lg:grid-cols-2 gap-12 items-center ${!isEven ? 'lg:grid-flow-dense' : ''}`}>
         {/* Image */}
         <div className={`relative h-[500px] ${!isEven ? 'lg:col-start-2' : ''}`}>
           <div className="relative h-full overflow-hidden">
@@ -302,5 +261,6 @@ function ProjectItem({
         </div>
       </div>
     </div>
+    </Link>
   );
 }

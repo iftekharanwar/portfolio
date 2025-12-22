@@ -4,8 +4,8 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Projects from '@/components/Projects';
 import About from '@/components/About';
-import Testimonials from '@/components/Testimonials';
 import Process from '@/components/Process';
+import Blog from '@/components/Blog';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -19,8 +19,8 @@ export default function Home() {
         <Hero />
         <Projects />
         <About />
-        <Testimonials />
         <Process />
+        <Blog />
         <Contact />
         <Footer />
       </main>
