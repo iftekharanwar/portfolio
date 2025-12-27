@@ -4,6 +4,13 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import {
+  ANIMATION_DURATION,
+  ANIMATION_EASING,
+  ANIMATION_DISTANCE,
+  STAGGER_DELAY,
+  ROTATION,
+} from '@/lib/animation-constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,12 +40,12 @@ export default function Hero() {
         const titleLines = mainTitleRef.current?.querySelectorAll('.title-line');
         if (titleLines && titleLines.length > 0) {
           gsap.from(titleLines, {
-            y: 200,
+            y: ANIMATION_DISTANCE.extraLarge,
             opacity: 0,
-            rotateX: -90,
-            stagger: 0.2,
-            duration: 1.5,
-            ease: 'power4.out',
+            rotateX: -ROTATION.quarter,
+            stagger: STAGGER_DELAY.wide,
+            duration: ANIMATION_DURATION.verySlow,
+            ease: ANIMATION_EASING.dramatic,
             delay: 0.5,
           });
         }
@@ -47,10 +54,10 @@ export default function Hero() {
       if (subTextRef.current) {
         gsap.from(subTextRef.current, {
           opacity: 0,
-          x: -100,
-          duration: 1.2,
+          x: -ANIMATION_DISTANCE.large,
+          duration: ANIMATION_DURATION.slow,
           delay: 1.8,
-          ease: 'power3.out',
+          ease: ANIMATION_EASING.energetic,
         });
       }
 
@@ -69,19 +76,19 @@ export default function Hero() {
       if (floatingItems && floatingItems.length > 0) {
         floatingItems.forEach((item, index) => {
           gsap.to(item, {
-            y: -30,
+            y: -ANIMATION_DISTANCE.small,
             repeat: -1,
             yoyo: true,
             duration: 2 + index * 0.5,
             ease: 'sine.inOut',
-            delay: index * 0.3,
+            delay: index * ANIMATION_DURATION.fast,
           });
 
           gsap.to(item, {
-            rotate: 360,
+            rotate: ROTATION.full,
             repeat: -1,
             duration: 20 + index * 5,
-            ease: 'none',
+            ease: ANIMATION_EASING.linear,
           });
         });
       }

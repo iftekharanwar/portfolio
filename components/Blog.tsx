@@ -1,67 +1,47 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import Link from 'next/link';
 import { blogPosts, BlogPost } from '@/data/blog';
-import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { ANIMATION_DURATION, ANIMATION_EASING, ANIMATION_DISTANCE, STAGGER_DELAY } from '@/lib/animation-constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Blog() {
   const sectionRef = useRef<HTMLElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const prefersReducedMotion = useReducedMotion();
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      try {
-        if (prefersReducedMotion) {
-          gsap.set(['.blog-title', '.blog-card'], {
-            opacity: 1,
-            y: 0,
-          });
-          return;
-        }
-        // Title animation
-        gsap.from('.blog-title', {
-        scrollTrigger: {
-          trigger: '.blog-title',
-          start: 'top 80%',
-          once: true,
+  useScrollAnimation(sectionRef, {
+    animations: [
+      {
+        selector: '.blog-title',
+        from: {
+          y: ANIMATION_DISTANCE.medium,
+          opacity: 0,
+          duration: ANIMATION_DURATION.normal,
+          ease: ANIMATION_EASING.energetic,
         },
-        y: 60,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      });
-
-      // Stagger blog card reveals
-      gsap.from('.blog-card', {
-        scrollTrigger: {
-          trigger: '.blog-grid',
-          start: 'top 75%',
-          once: true,
+        start: 'top 80%',
+      },
+      {
+        selector: '.blog-card',
+        from: {
+          y: ANIMATION_DISTANCE.medium,
+          opacity: 0,
+          stagger: STAGGER_DELAY.normal,
+          duration: ANIMATION_DURATION.normal,
+          ease: ANIMATION_EASING.smooth,
         },
-        y: 50,
-        opacity: 0,
-        stagger: 0.08,
-        duration: 0.6,
-        ease: 'power2.out',
-      });
-      } catch (error) {
-        console.error('Blog animation error:', error);
-        gsap.set(['.blog-title', '.blog-card'], {
-          opacity: 1,
-          y: 0,
-        });
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [prefersReducedMotion]);
+        trigger: '.blog-grid',
+        start: 'top 75%',
+      },
+    ],
+    once: true,
+  });
 
   const featuredPost = blogPosts.find(post => post.featured);
   const recentPosts = blogPosts.slice(0, 6);

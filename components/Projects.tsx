@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { projects, ProjectData } from '@/data/projects';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { DisplayHeading, SectionLabel } from '@/components/ui/Typography';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -74,15 +75,12 @@ export default function Projects() {
         <div className="projects-title mb-24">
           <div className="flex items-end justify-between flex-wrap gap-8">
             <div>
-              <span className="text-gold text-sm tracking-[0.3em] uppercase mb-4 block">SELECTED PROJECTS</span>
-              <h2
-                className="text-[clamp(3rem,10vw,8rem)] font-bold leading-none tracking-tighter text-gold-dark"
-                style={{ fontFamily: 'var(--font-cursive)' }}
-              >
+              <SectionLabel className="mb-4 block">SELECTED PROJECTS</SectionLabel>
+              <DisplayHeading>
                 FEATURED
                 <br />
                 <span className="text-gold">WORK</span>
-              </h2>
+              </DisplayHeading>
             </div>
             <div className="text-right">
               <p className="text-gold-dark/60 max-w-md text-lg">
