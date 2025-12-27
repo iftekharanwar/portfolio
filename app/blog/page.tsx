@@ -20,23 +20,23 @@ export default function BlogPage() {
     const ctx = gsap.context(() => {
       // Hero animation
       gsap.from('.blog-hero-text', {
-        y: 60,
+        y: 30,
         opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
+        duration: 0.5,
+        ease: 'power2.out',
       });
 
       // Blog cards animation
       gsap.from('.blog-card', {
         scrollTrigger: {
           trigger: '.blog-grid',
-          start: 'top 75%',
+          start: 'top 85%',
           once: true,
         },
-        y: 50,
+        y: 30,
         opacity: 0,
-        stagger: 0.08,
-        duration: 0.6,
+        stagger: 0.05,
+        duration: 0.4,
         ease: 'power2.out',
       });
     }, sectionRef);
@@ -55,14 +55,13 @@ export default function BlogPage() {
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="blog-hero-text">
-            <motion.button
+            <button
               onClick={() => router.push('/')}
-              className="flex items-center gap-3 text-gold-light text-sm tracking-wider uppercase mb-12 hover:text-gold transition-colors"
-              whileHover={{ x: -5 }}
+              className="flex items-center gap-3 text-gold-light text-sm tracking-wider uppercase mb-12 hover:text-gold hover:-translate-x-1 transition-all duration-300"
             >
               <span className="text-2xl">←</span>
               BACK TO HOME
-            </motion.button>
+            </button>
 
             <h1
               className="text-[clamp(4rem,12vw,12rem)] font-bold leading-none tracking-tighter text-cream mb-8"
@@ -158,17 +157,19 @@ function BlogCard({
         data-cursor-hover
       >
         {/* Image */}
-        <div className="relative h-[400px] overflow-hidden mb-6">
+        <div className="relative h-[400px] overflow-hidden mb-6 bg-gold-dark/20">
           <Image
             src={post.coverImage}
             alt={post.title}
             fill
-            className={`object-cover transition-all duration-700 ${
-              isHovered ? 'scale-110 brightness-75' : 'scale-100'
+            className={`object-cover transition-all duration-500 ${
+              isHovered ? 'scale-105 brightness-90' : 'scale-100'
             }`}
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             loading="lazy"
-            quality={75}
+            quality={80}
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8A/9k="
           />
 
           {/* Overlay */}
