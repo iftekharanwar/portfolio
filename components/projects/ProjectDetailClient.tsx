@@ -27,6 +27,32 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
   }, [project.id]);
 
   useEffect(() => {
+    const mobileGallery = document.querySelector('.mobile-gallery');
+    const counter = document.querySelector('.gallery-counter');
+    const progressBar = document.querySelector('.gallery-progress') as HTMLElement;
+
+    if (mobileGallery && counter && progressBar) {
+      const handleScroll = () => {
+        const scrollLeft = mobileGallery.scrollLeft;
+        const scrollWidth = mobileGallery.scrollWidth - mobileGallery.clientWidth;
+        const scrollPercentage = (scrollLeft / scrollWidth) * 100;
+
+        const slideWidth = window.innerWidth * 0.90 + 16; // 90vw + gap
+        const activeIndex = Math.round(scrollLeft / slideWidth);
+        counter.textContent = (activeIndex + 1).toString().padStart(2, '0');
+
+        progressBar.style.width = `${scrollPercentage}%`;
+      };
+
+      mobileGallery.addEventListener('scroll', handleScroll, { passive: true });
+
+      return () => {
+        mobileGallery.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, [project.id]);
+
+  useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero entrance animation
       const tl = gsap.timeline();
@@ -62,9 +88,9 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
         y: '30%',
       });
 
-      // Horizontal scroll gallery
+      // Horizontal scroll gallery (only on desktop)
       const gallery = document.querySelector('.horizontal-gallery');
-      if (gallery) {
+      if (gallery && window.innerWidth >= 1024) {
         const galleryWidth = gallery.scrollWidth;
         gsap.to(gallery, {
           scrollTrigger: {
@@ -293,22 +319,75 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
 
       {/* HORIZONTAL SCROLL GALLERY*/}
       <section className="gallery-container relative bg-gold-dark overflow-hidden">
-        <div className="horizontal-gallery flex gap-8 px-8 py-32">
+        {/* Mobile (horizontal scroll) */}
+        <div className="lg:hidden relative py-12">
+          <div className="absolute top-6 left-0 right-0 z-20 flex items-center justify-center gap-2">
+            <div className="flex items-center gap-1 px-4 py-2 bg-cream/10 backdrop-blur-sm">
+              <span className="gallery-counter text-gold-light text-xs font-bold tracking-widest">01</span>
+              <span className="text-gold-light/40 text-xs">/</span>
+              <span className="text-gold-light/60 text-xs">{project.gallery.length.toString().padStart(2, '0')}</span>
+            </div>
+          </div>
+
+          <div className="mobile-gallery overflow-x-auto snap-x snap-mandatory px-6" style={{ WebkitOverflowScrolling: 'touch' }}>
+            <div className="flex gap-4">
+              {project.gallery.map((img, index) => (
+                <div
+                  key={index}
+                  className="gallery-slide flex-shrink-0 w-[90vw] snap-center relative"
+                >
+                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-gold-dark/20">
+                    <Image
+                      src={img.url}
+                      alt={img.caption || `Gallery image ${index + 1}`}
+                      fill
+                      className="object-contain"
+                      sizes="90vw"
+                      priority={index === 0}
+                    />
+                  </div>
+
+                  {img.caption && (
+                    <div className="mt-4 px-2 text-center">
+                      <p className="text-cream text-sm font-light tracking-wide leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
+                        {img.caption}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="absolute bottom-6 left-6 right-6 h-px bg-gold-light/20">
+            <div
+              className="gallery-progress h-full bg-gold-light transition-all duration-300"
+              style={{ width: `${(1 / project.gallery.length) * 100}%` }}
+            />
+          </div>
+        </div>
+
+        <div className="horizontal-gallery hidden lg:flex gap-12 px-12 py-32">
           {project.gallery.map((img, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-[80vw] h-[70vh] relative group"
+              className="flex-shrink-0 w-[75vw] relative group"
             >
-              <Image
-                src={img.url}
-                alt={img.caption || `Gallery image ${index + 1}`}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="80vw"
-              />
+              <div className="relative w-full aspect-[16/10] overflow-hidden bg-gold-dark/20">
+                <Image
+                  src={img.url}
+                  alt={img.caption || `Gallery image ${index + 1}`}
+                  fill
+                  className="object-contain transition-transform duration-700 group-hover:scale-105"
+                  sizes="75vw"
+                />
+              </div>
+
               {img.caption && (
-                <div className="absolute bottom-8 left-8 text-cream text-2xl font-bold tracking-wider">
-                  {img.caption}
+                <div className="mt-6 text-center">
+                  <p className="text-cream text-xl font-light tracking-wide leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
+                    {img.caption}
+                  </p>
                 </div>
               )}
             </div>

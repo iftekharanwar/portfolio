@@ -125,6 +125,36 @@ html {
   animation: spin-slow 20s linear infinite;
 }
 
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+.mobile-gallery {
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.mobile-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-slide {
+  scroll-snap-align: center;
+  scroll-snap-stop: normal;
+}
+
+.gallery-dot {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
