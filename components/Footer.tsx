@@ -63,10 +63,10 @@ export default function Footer() {
 
       <div className="footer-content relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-16">
         {/* Top Section */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <a href="#" className="inline-block mb-6 group">
+            <a href="/" className="inline-block mb-6 group">
               <h3
                 className="text-4xl md:text-5xl font-bold text-cream group-hover:text-gold-light transition-colors duration-300"
                 style={{ fontFamily: 'var(--font-cursive)' }}
@@ -79,47 +79,50 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-gold-light text-sm tracking-wider uppercase mb-6">NAVIGATION</h4>
-            <ul className="space-y-3">
-              {['Work', 'About', 'Contact'].map((item, index) => (
-                <li key={index}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="text-cream/70 hover:text-gold-light transition-colors duration-300 text-lg"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Navigation and Connect in 2 columns on mobile */}
+          <div className="grid grid-cols-2 gap-8 md:contents">
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-gold-light text-sm tracking-wider uppercase mb-6">NAVIGATION</h4>
+              <ul className="space-y-3">
+                {['Work', 'About', 'Contact'].map((item, index) => (
+                  <li key={index}>
+                    <a
+                      href={`#${item.toLowerCase()}`}
+                      className="text-cream/70 hover:text-gold-light transition-colors duration-300 text-lg"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Social */}
-          <div>
-            <h4 className="text-gold-light text-sm tracking-wider uppercase mb-6">CONNECT</h4>
-            <ul className="space-y-3">
-              {[
-                { name: 'LinkedIn', href: 'https://www.linkedin.com/in/iftekharanwar/' },
-                { name: 'GitHub', href: 'https://github.com/iftekharanwar' },
-                { name: 'Instagram', href: 'https://www.instagram.com/wespaxe/' },
-              ].map((social, index) => (
-                <li key={index}>
-                  <a
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-3 text-cream/70 hover:text-gold-light transition-colors duration-300 text-lg"
-                  >
-                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    {social.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            {/* Social */}
+            <div>
+              <h4 className="text-gold-light text-sm tracking-wider uppercase mb-6">CONNECT</h4>
+              <ul className="space-y-3">
+                {[
+                  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/iftekharanwar/' },
+                  { name: 'GitHub', href: 'https://github.com/iftekharanwar' },
+                  { name: 'Instagram', href: 'https://www.instagram.com/wespaxe/' },
+                ].map((social, index) => (
+                  <li key={index}>
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-3 text-cream/70 hover:text-gold-light transition-colors duration-300 text-lg"
+                    >
+                      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      {social.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -140,17 +143,6 @@ export default function Footer() {
               Terms of Service
             </a>
           </div>
-
-          {/* Back to Top */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="group flex items-center gap-2 text-cream/70 hover:text-gold-light transition-colors duration-300"
-          >
-            <span className="text-sm tracking-wider">BACK TO TOP</span>
-            <svg className="w-5 h-5 transform group-hover:-translate-y-1 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 15l7-7 7 7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
         </div>
       </div>
 

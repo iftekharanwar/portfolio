@@ -202,25 +202,25 @@ export default function About() {
               </div>
 
               {/* Stats Grid */}
-              <div className="about-text-line grid grid-cols-3 gap-8 pt-8 border-t border-gold-light/20">
-                <div>
-                  <div className="stat-number text-4xl font-bold text-gold-light mb-2" data-target="15">
+              <div className="about-text-line grid grid-cols-3 gap-6 md:gap-8 pt-8 border-t border-gold-light/20">
+                <div className="text-center md:text-left">
+                  <div className="stat-number text-3xl md:text-4xl font-bold text-gold-light mb-2" data-target="15">
                     0+
                   </div>
                   <div className="text-xs text-cream/60 uppercase tracking-wider">
                     Projects<br />Completed
                   </div>
                 </div>
-                <div>
-                  <div className="stat-number text-4xl font-bold text-gold-light mb-2" data-target="50">
+                <div className="text-center md:text-left">
+                  <div className="stat-number text-3xl md:text-4xl font-bold text-gold-light mb-2" data-target="50">
                     0+
                   </div>
                   <div className="text-xs text-cream/60 uppercase tracking-wider">
                     Team<br />Collaborations
                   </div>
                 </div>
-                <div>
-                  <div className="stat-number text-4xl font-bold text-gold-light mb-2" data-target="13">
+                <div className="text-center md:text-left">
+                  <div className="stat-number text-3xl md:text-4xl font-bold text-gold-light mb-2" data-target="13">
                     0
                   </div>
                   <div className="text-xs text-cream/60 uppercase tracking-wider">

@@ -57,7 +57,7 @@ export default function Navbar() {
         <div className="max-w-[95%] mx-auto flex items-center justify-between">
           {/* Logo */}
           <a
-            href="#"
+            href="/"
             className="group flex items-center gap-3"
             data-cursor-hover
           >

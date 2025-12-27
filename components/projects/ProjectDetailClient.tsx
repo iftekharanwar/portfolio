@@ -184,11 +184,11 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex justify-center"
         >
-          <div className="w-px h-24 bg-cream/30">
+          <div className="w-px h-24 bg-cream/30 relative">
             <motion.div
-              className="w-px h-12 bg-gold"
+              className="w-px h-12 bg-gold absolute top-0 left-0"
               animate={{ y: [0, 48, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             />
@@ -196,8 +196,8 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
         </motion.div>
       </section>
 
-      {/* PROJECT INFO BAR */}
-      <section className="sticky top-0 z-50 bg-cream/95 backdrop-blur-md border-b-2 border-gold/20">
+      {/* PROJECT INFO BAR (hidden on mobile, sticky on desktop) */}
+      <section className="hidden lg:block sticky top-0 z-50 bg-cream/95 backdrop-blur-md border-b-2 border-gold/20">
         <div className="max-w-[95%] mx-auto px-8 py-6 flex justify-between items-center flex-wrap gap-4">
           <div className="flex gap-8 flex-wrap">
             <div>
@@ -225,6 +225,30 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
           >
             BACK TO PROJECTS
           </button>
+        </div>
+      </section>
+
+      {/* Project Info (only visible on mobile) */}
+      <section className="lg:hidden bg-cream border-b-2 border-gold/20 py-6 px-6">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-gold-dark/5 p-4 rounded">
+            <div className="text-xs text-gold-dark/50 uppercase tracking-wider mb-2">Context</div>
+            <div className="text-gold-dark font-bold text-sm">{project.context}</div>
+          </div>
+          <div className="bg-gold-dark/5 p-4 rounded">
+            <div className="text-xs text-gold-dark/50 uppercase tracking-wider mb-2">Role</div>
+            <div className="text-gold-dark font-bold text-sm">{project.role}</div>
+          </div>
+          <div className="bg-gold-dark/5 p-4 rounded">
+            <div className="text-xs text-gold-dark/50 uppercase tracking-wider mb-2">Duration</div>
+            <div className="text-gold-dark font-bold text-sm">{project.duration}</div>
+          </div>
+          {project.achievement && (
+            <div className="bg-gold-dark/5 p-4 rounded">
+              <div className="text-xs text-gold-dark/50 uppercase tracking-wider mb-2">Achievement</div>
+              <div className="text-gold-dark font-bold text-sm">{project.achievement}</div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -324,29 +348,29 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
       </section>
 
       {/* PROCESS TIMELINE */}
-      <section className="process-section py-32 px-8 md:px-16 bg-gold-dark">
+      <section className="process-section py-20 md:py-32 px-6 md:px-16 bg-gold-dark">
         <div className="max-w-7xl mx-auto">
           <h2
-            className="text-[clamp(3rem,10vw,10rem)] font-bold leading-none tracking-tighter text-cream mb-24"
+            className="text-[clamp(2.5rem,10vw,10rem)] font-bold leading-none tracking-tighter text-cream mb-16 md:mb-24"
             style={{ fontFamily: 'var(--font-cursive)' }}
           >
             PROCESS
           </h2>
 
-          <div className="space-y-12">
+          <div className="space-y-8 md:space-y-12">
             {project.process.map((step, index) => (
-              <div key={index} className="process-step flex gap-8 items-start">
+              <div key={index} className="process-step flex gap-4 md:gap-8 items-start">
                 <div
-                  className="text-[clamp(4rem,10vw,10rem)] font-bold text-gold/20 leading-none flex-shrink-0"
+                  className="text-[clamp(2.5rem,15vw,10rem)] font-bold text-gold/20 leading-none flex-shrink-0 w-16 md:w-auto"
                   style={{ fontFamily: 'var(--font-cursive)' }}
                 >
                   {(index + 1).toString().padStart(2, '0')}
                 </div>
-                <div className="pt-8">
-                  <h3 className="text-4xl font-bold text-gold-light mb-4 tracking-wider">
+                <div className="pt-2 md:pt-8 flex-1 min-w-0">
+                  <h3 className="text-2xl md:text-4xl font-bold text-gold-light mb-3 md:mb-4 tracking-wider break-words">
                     {step.title}
                   </h3>
-                  <p className="text-xl text-cream/80 leading-relaxed max-w-2xl" style={{ fontFamily: 'var(--font-serif)' }}>
+                  <p className="text-base md:text-xl text-cream/80 leading-relaxed max-w-2xl break-words" style={{ fontFamily: 'var(--font-serif)' }}>
                     {step.description}
                   </p>
                 </div>
@@ -378,13 +402,16 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
       )}
 
       {/* TAGS */}
-      <section className="reveal py-20 px-8 md:px-16 bg-gold-dark/5">
+      <section className="reveal py-16 md:py-20 px-6 md:px-16 bg-gold-dark/5">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap gap-4 justify-center">
+          <h3 className="text-center text-gold text-xs tracking-[0.3em] uppercase mb-8">
+            TECHNOLOGIES & SKILLS
+          </h3>
+          <div className="flex flex-wrap gap-3 md:gap-4 justify-center">
             {project.tags.map((tag, index) => (
               <span
                 key={index}
-                className="px-8 py-4 bg-gold-dark text-cream text-sm font-bold tracking-widest uppercase border-2 border-gold-dark hover:bg-cream hover:text-gold-dark transition-all duration-300"
+                className="px-4 md:px-8 py-3 md:py-4 bg-gold-dark text-cream text-xs md:text-sm font-bold tracking-wider md:tracking-widest uppercase border-2 border-gold-dark hover:bg-cream hover:text-gold-dark transition-all duration-300"
               >
                 {tag}
               </span>

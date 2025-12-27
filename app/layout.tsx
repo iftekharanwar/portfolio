@@ -24,11 +24,18 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://iftekharanwar.com'),
   title: "Iftekhar Anwar | Creative Designer & Developer",
   description: "Student, builder, and creative technologist. I design and develop premium digital experiences with bold animations, thoughtful UX, and clean code. Apple Developers Academy alumnus.",
   keywords: ["Iftekhar Anwar", "designer", "developer", "portfolio", "web design", "UI/UX", "React", "Next.js", "creative developer", "Apple Developers Academy"],
   authors: [{ name: "Iftekhar Anwar" }],
   creator: "Iftekhar Anwar",
+  applicationName: "Iftekhar Anwar",
+  appleWebApp: {
+    capable: true,
+    title: "Iftekhar Anwar",
+    statusBarStyle: "black-translucent",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -38,7 +45,7 @@ export const metadata: Metadata = {
     description: "Student, builder, and creative technologist crafting premium digital experiences.",
     images: [
       {
-        url: "/og-image.jpg", // We'll create this
+        url: "/og-image.png", // We'll create this
         width: 1200,
         height: 630,
         alt: "Iftekhar Anwar Portfolio",
@@ -49,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Iftekhar Anwar | Creative Designer & Developer",
     description: "Student, builder, and creative technologist crafting premium digital experiences.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png"],
     creator: "@wespaxe",
   },
   robots: {
@@ -66,7 +73,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    apple: "/apple-icon.png",
   },
   manifest: "/manifest.json",
 };
