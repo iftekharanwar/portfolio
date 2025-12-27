@@ -37,7 +37,6 @@ export default function Navbar() {
   const menuItems = [
     { label: 'WORK', href: '#projects' },
     { label: 'ABOUT', href: '#about' },
-    { label: 'PROCESS', href: '#process' },
     { label: 'CONTACT', href: '#contact' },
   ];
 
