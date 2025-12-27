@@ -131,29 +131,48 @@ function ProjectItem({
   useEffect(() => {
     if (!itemRef.current || !imageRef.current || !titleRef.current) return;
 
+    let animationFrameId: number | null = null;
+
     const handleMouseMove = (e: MouseEvent) => {
-      if (!imageRef.current) return;
-      const rect = itemRef.current!.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 30;
+      if (!imageRef.current || !itemRef.current) return;
 
-      gsap.to(imageRef.current, {
-        x,
-        y,
-        rotateY: x * 0.5,
-        rotateX: -y * 0.5,
-        duration: 0.6,
-        ease: 'power2.out',
-      });
+      // Throttle with RAF for better performance
+      if (animationFrameId !== null) return;
 
-      gsap.to(titleRef.current, {
-        x: -x * 0.3,
-        duration: 0.6,
-        ease: 'power2.out',
+      animationFrameId = requestAnimationFrame(() => {
+        if (!imageRef.current || !titleRef.current || !itemRef.current) return;
+
+        const rect = itemRef.current.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
+        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 30;
+
+        gsap.to(imageRef.current, {
+          x,
+          y,
+          rotateY: x * 0.5,
+          rotateX: -y * 0.5,
+          duration: 0.6,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+
+        gsap.to(titleRef.current, {
+          x: -x * 0.3,
+          duration: 0.6,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+
+        animationFrameId = null;
       });
     };
 
     const handleMouseLeave = () => {
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+
       gsap.to(imageRef.current, {
         x: 0,
         y: 0,
@@ -161,12 +180,14 @@ function ProjectItem({
         rotateX: 0,
         duration: 0.6,
         ease: 'power2.out',
+        overwrite: 'auto',
       });
 
       gsap.to(titleRef.current, {
         x: 0,
         duration: 0.6,
         ease: 'power2.out',
+        overwrite: 'auto',
       });
     };
 
@@ -175,6 +196,9 @@ function ProjectItem({
     element.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+      }
       element.removeEventListener('mousemove', handleMouseMove);
       element.removeEventListener('mouseleave', handleMouseLeave);
     };

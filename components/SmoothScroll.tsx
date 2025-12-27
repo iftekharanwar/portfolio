@@ -15,8 +15,12 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   useEffect(() => {
     // Initialize Lenis
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.8,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 2,
+      infinite: false,
     });
 
     lenisRef.current = lenis;
@@ -29,6 +33,15 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     });
 
     gsap.ticker.lagSmoothing(0);
+
+    ScrollTrigger.config({
+      syncInterval: 150,
+      autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
+    });
+
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
 
     return () => {
       lenis.destroy();

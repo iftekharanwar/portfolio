@@ -58,7 +58,7 @@ export default function Footer() {
           <div>
             <h4 className="text-gold-light text-sm tracking-wider uppercase mb-6">NAVIGATION</h4>
             <ul className="space-y-3">
-              {['Work', 'About', 'Process', 'Contact'].map((item, index) => (
+              {['Work', 'About', 'Contact'].map((item, index) => (
                 <li key={index}>
                   <a
                     href={`#${item.toLowerCase()}`}
@@ -76,10 +76,9 @@ export default function Footer() {
             <h4 className="text-gold-light text-sm tracking-wider uppercase mb-6">CONNECT</h4>
             <ul className="space-y-3">
               {[
-                { name: 'LinkedIn', href: '#' },
-                { name: 'Twitter', href: '#' },
-                { name: 'GitHub', href: '#' },
-                { name: 'Dribbble', href: '#' },
+                { name: 'LinkedIn', href: 'https://www.linkedin.com/in/iftekharanwar/' },
+                { name: 'GitHub', href: 'https://github.com/iftekharanwar' },
+                { name: 'Instagram', href: 'https://www.instagram.com/wespaxe/' },
               ].map((social, index) => (
                 <li key={index}>
                   <a
@@ -109,10 +108,10 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center gap-8">
-            <a href="#" className="text-cream/50 hover:text-gold-light text-sm transition-colors duration-300">
+            <a href="https://www.termsfeed.com/live/b4e4e9c5-8f41-4b3a-9a29-8e3f5a6b7c8d" target="_blank" rel="noopener noreferrer" className="text-cream/50 hover:text-gold-light text-sm transition-colors duration-300">
               Privacy Policy
             </a>
-            <a href="#" className="text-cream/50 hover:text-gold-light text-sm transition-colors duration-300">
+            <a href="https://www.termsfeed.com/live/c5f5f0d6-9g52-5c4b-0b30-9f4g6b7c8e9e" target="_blank" rel="noopener noreferrer" className="text-cream/50 hover:text-gold-light text-sm transition-colors duration-300">
               Terms of Service
             </a>
           </div>

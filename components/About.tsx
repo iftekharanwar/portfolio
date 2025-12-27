@@ -77,18 +77,22 @@ export default function About() {
       if (stats && stats.length > 0) {
         stats.forEach((stat) => {
           const target = parseInt(stat.getAttribute('data-target') || '0');
-          gsap.from(stat, {
+          const hasPlus = stat.textContent?.includes('+');
+
+          const counter = { value: 0 };
+
+          gsap.to(counter, {
+            value: target,
             scrollTrigger: {
               trigger: stat,
               start: 'top 85%',
               once: true,
             },
-            textContent: 0,
             duration: 1.5,
             ease: 'power1.out',
-            snap: { textContent: 1 },
             onUpdate: function () {
-              stat.textContent = Math.ceil(parseFloat(stat.textContent as string)).toString() + '+';
+              const currentValue = Math.ceil(counter.value);
+              stat.textContent = hasPlus ? currentValue.toString() + '+' : currentValue.toString();
             },
           });
         });
@@ -193,7 +197,7 @@ export default function About() {
               {/* Stats Grid */}
               <div className="about-text-line grid grid-cols-3 gap-8 pt-8 border-t border-gold-light/20">
                 <div>
-                  <div className="stat-number text-4xl font-bold text-gold-light mb-2" data-target="50">
+                  <div className="stat-number text-4xl font-bold text-gold-light mb-2" data-target="15">
                     0+
                   </div>
                   <div className="text-xs text-cream/60 uppercase tracking-wider">
@@ -201,16 +205,16 @@ export default function About() {
                   </div>
                 </div>
                 <div>
-                  <div className="stat-number text-4xl font-bold text-gold-light mb-2" data-target="30">
+                  <div className="stat-number text-4xl font-bold text-gold-light mb-2" data-target="50">
                     0+
                   </div>
                   <div className="text-xs text-cream/60 uppercase tracking-wider">
-                    Happy<br />Clients
+                    Team<br />Collaborations
                   </div>
                 </div>
                 <div>
-                  <div className="stat-number text-4xl font-bold text-gold-light mb-2" data-target="15">
-                    0+
+                  <div className="stat-number text-4xl font-bold text-gold-light mb-2" data-target="13">
+                    0
                   </div>
                   <div className="text-xs text-cream/60 uppercase tracking-wider">
                     Awards<br />Won

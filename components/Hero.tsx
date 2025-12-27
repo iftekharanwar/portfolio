@@ -23,52 +23,76 @@ export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      try {
-        if (prefersReducedMotion) {
-          gsap.set(['.title-line', '.hero-subtext', '.hero-image-mask', '.floating-shape'], {
-            opacity: 1,
-            y: 0,
-            x: 0,
-            scale: 1,
-            rotateX: 0,
-          });
-          return;
-        }
+    if (heroRef.current) {
+      heroRef.current.style.opacity = '1';
+      heroRef.current.style.transform = 'scale(1)';
+    }
+
+    const initTimer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        try {
+          if (prefersReducedMotion) {
+            gsap.set(['.title-line', '.hero-subtext', '.hero-image-mask', '.floating-shape'], {
+              opacity: 1,
+              y: 0,
+              x: 0,
+              scale: 1,
+              rotateX: 0,
+            });
+            return;
+          }
 
         // Dramatic entrance - main title
         const titleLines = mainTitleRef.current?.querySelectorAll('.title-line');
         if (titleLines && titleLines.length > 0) {
-          gsap.from(titleLines, {
-            y: ANIMATION_DISTANCE.extraLarge,
-            opacity: 0,
-            rotateX: -ROTATION.quarter,
-            stagger: STAGGER_DELAY.wide,
-            duration: ANIMATION_DURATION.verySlow,
-            ease: ANIMATION_EASING.dramatic,
-            delay: 0.5,
-          });
+          gsap.fromTo(titleLines,
+            {
+              y: ANIMATION_DISTANCE.extraLarge,
+              opacity: 0,
+              rotateX: -ROTATION.quarter,
+            },
+            {
+              y: 0,
+              opacity: 1,
+              rotateX: 0,
+              stagger: STAGGER_DELAY.wide,
+              duration: ANIMATION_DURATION.verySlow,
+              ease: ANIMATION_EASING.dramatic,
+              delay: 0.5,
+            }
+          );
         }
 
       // Subtext reveal
       if (subTextRef.current) {
-        gsap.from(subTextRef.current, {
-          opacity: 0,
-          x: -ANIMATION_DISTANCE.large,
-          duration: ANIMATION_DURATION.slow,
-          delay: 1.8,
-          ease: ANIMATION_EASING.energetic,
-        });
+        gsap.fromTo(subTextRef.current,
+          {
+            opacity: 0,
+            x: -ANIMATION_DISTANCE.large,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            duration: ANIMATION_DURATION.slow,
+            delay: 1.8,
+            ease: ANIMATION_EASING.energetic,
+          }
+        );
       }
 
       // Image mask reveal
       if (imageMaskRef.current) {
-        gsap.from(imageMaskRef.current, {
-          clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
-          duration: 1.8,
-          delay: 1.2,
-          ease: 'power4.inOut',
-        });
+        gsap.fromTo(imageMaskRef.current,
+          {
+            clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
+          },
+          {
+            clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+            duration: 1.8,
+            delay: 1.2,
+            ease: 'power4.inOut',
+          }
+        );
       }
 
       // Floating elements animation
@@ -95,17 +119,30 @@ export default function Hero() {
 
       // Parallax scroll
       if (heroRef.current) {
+        gsap.set(heroRef.current, {
+          scale: 1,
+          opacity: 1,
+        });
+
         gsap.to(heroRef.current, {
           scrollTrigger: {
             trigger: heroRef.current,
             start: 'top top',
             end: 'bottom top',
             scrub: true,
+            onEnter: () => {
+              if (heroRef.current) {
+                heroRef.current.style.opacity = '1';
+                heroRef.current.style.transform = 'scale(1)';
+              }
+            },
           },
           scale: 0.9,
           opacity: 0.3,
         });
       }
+
+      ScrollTrigger.refresh();
       } catch (error) {
         console.error('Hero animation error:', error);
         gsap.set(['.title-line', '.hero-subtext', '.hero-image-mask', '.floating-shape'], {
@@ -115,9 +152,16 @@ export default function Hero() {
           scale: 1,
         });
       }
-    }, heroRef);
+      }, heroRef);
 
-    return () => ctx.revert();
+      return () => {
+        ctx.revert();
+      };
+    }, 100);
+
+    return () => {
+      clearTimeout(initTimer);
+    };
   }, [prefersReducedMotion]);
 
   return (
