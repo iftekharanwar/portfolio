@@ -107,13 +107,14 @@ export default function BlogPage() {
 
           {/* Grid */}
           <div className="blog-grid grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {blogPosts.map((post) => (
+            {blogPosts.map((post, index) => (
               <BlogCard
                 key={post.id}
                 post={post}
                 isHovered={hoveredCard === post.id}
                 onHover={() => setHoveredCard(post.id)}
                 onLeave={() => setHoveredCard(null)}
+                priority={index < 6}
               />
             ))}
           </div>
@@ -158,11 +159,13 @@ function BlogCard({
   isHovered,
   onHover,
   onLeave,
+  priority = false,
 }: {
   post: BlogPost;
   isHovered: boolean;
   onHover: () => void;
   onLeave: () => void;
+  priority?: boolean;
 }) {
   return (
     <Link href={`/blog/${post.slug}`}>
@@ -182,7 +185,7 @@ function BlogCard({
               isHovered ? 'scale-105 brightness-90' : 'scale-100'
             }`}
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            loading="lazy"
+            {...(priority ? { priority: true } : { loading: 'lazy' as const })}
             quality={80}
             placeholder="blur"
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8A/9k="

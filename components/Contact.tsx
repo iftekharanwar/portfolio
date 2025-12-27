@@ -3,10 +3,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+}
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -16,47 +22,117 @@ export default function Contact() {
     email: '',
     message: '',
   });
+  const [errors, setErrors] = useState<FormErrors>({});
   const [focused, setFocused] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate heading
-      gsap.from('.contact-heading', {
-        scrollTrigger: {
-          trigger: '.contact-heading',
-          start: 'top 80%',
-        },
-        y: 100,
-        opacity: 0,
-        duration: 1.2,
-        ease: 'power4.out',
-      });
+      try {
+        if (prefersReducedMotion) {
+          gsap.set(['.contact-heading', formRef.current], {
+            opacity: 1,
+            y: 0,
+          });
+          return;
+        }
 
-      // Form animation
-      gsap.from(formRef.current, {
-        scrollTrigger: {
-          trigger: formRef.current,
-          start: 'top 75%',
-        },
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        delay: 0.3,
-        ease: 'power3.out',
-      });
+        // Animate heading
+        gsap.from('.contact-heading', {
+          scrollTrigger: {
+            trigger: '.contact-heading',
+            start: 'top 80%',
+            once: true,
+          },
+          y: 100,
+          opacity: 0,
+          duration: 1.2,
+          ease: 'power4.out',
+        });
 
+        // Form animation
+        gsap.from(formRef.current, {
+          scrollTrigger: {
+            trigger: formRef.current,
+            start: 'top 75%',
+            once: true,
+          },
+          y: 50,
+          opacity: 0,
+          duration: 1,
+          delay: 0.3,
+          ease: 'power3.out',
+        });
+      } catch (error) {
+        console.error('Contact animation error:', error);
+        gsap.set(['.contact-heading', formRef.current], {
+          opacity: 1,
+          y: 0,
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    // Clear error when user starts typing
+    if (errors[name as keyof FormErrors]) {
+      setErrors({ ...errors, [name]: undefined });
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!emailRegex.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    } else if (formData.message.trim().length > 1000) {
+      newErrors.message = 'Message must be less than 1000 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate form
+    if (!validateForm()) {
+      toast.error('Please fix the errors in the form', {
+        duration: 3000,
+        style: {
+          background: '#C9A961',
+          color: '#1a1612',
+          fontWeight: 'bold',
+          padding: '16px 24px',
+        },
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -165,9 +241,17 @@ export default function Contact() {
                 onChange={handleChange}
                 onFocus={() => setFocused('name')}
                 onBlur={() => setFocused(null)}
-                className="w-full bg-transparent border-b-2 border-cream/20 focus:border-gold-light py-4 text-cream text-lg transition-all duration-300 outline-none"
-                required
+                className={`w-full bg-transparent border-b-2 ${
+                  errors.name ? 'border-red-400' : 'border-cream/20'
+                } focus:border-gold-light py-4 text-cream text-lg transition-all duration-300 outline-none`}
+                aria-invalid={!!errors.name}
+                aria-describedby={errors.name ? 'name-error' : undefined}
               />
+              {errors.name && (
+                <p id="name-error" className="mt-2 text-sm text-red-400">
+                  {errors.name}
+                </p>
+              )}
             </div>
 
             {/* Email Field */}
@@ -190,9 +274,17 @@ export default function Contact() {
                 onChange={handleChange}
                 onFocus={() => setFocused('email')}
                 onBlur={() => setFocused(null)}
-                className="w-full bg-transparent border-b-2 border-cream/20 focus:border-gold-light py-4 text-cream text-lg transition-all duration-300 outline-none"
-                required
+                className={`w-full bg-transparent border-b-2 ${
+                  errors.email ? 'border-red-400' : 'border-cream/20'
+                } focus:border-gold-light py-4 text-cream text-lg transition-all duration-300 outline-none`}
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? 'email-error' : undefined}
               />
+              {errors.email && (
+                <p id="email-error" className="mt-2 text-sm text-red-400">
+                  {errors.email}
+                </p>
+              )}
             </div>
 
             {/* Message Field */}
@@ -215,18 +307,28 @@ export default function Contact() {
                 onFocus={() => setFocused('message')}
                 onBlur={() => setFocused(null)}
                 rows={4}
-                className="w-full bg-transparent border-b-2 border-cream/20 focus:border-gold-light py-4 text-cream text-lg transition-all duration-300 outline-none resize-none"
-                required
+                maxLength={1000}
+                className={`w-full bg-transparent border-b-2 ${
+                  errors.message ? 'border-red-400' : 'border-cream/20'
+                } focus:border-gold-light py-4 text-cream text-lg transition-all duration-300 outline-none resize-none`}
+                aria-invalid={!!errors.message}
+                aria-describedby={errors.message ? 'message-error' : undefined}
               />
+              {errors.message && (
+                <p id="message-error" className="mt-2 text-sm text-red-400">
+                  {errors.message}
+                </p>
+              )}
+              <p className="mt-1 text-xs text-cream/40 text-right">
+                {formData.message.length}/1000
+              </p>
             </div>
 
             {/* Submit Button */}
-            <motion.button
+            <button
               type="submit"
               disabled={isSubmitting}
-              className="group relative w-full py-6 bg-gold hover:bg-gold-light text-gold-dark font-bold text-lg tracking-wider overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed transition-colors duration-300"
-              whileHover={!isSubmitting ? { scale: 1.02 } : {}}
-              whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+              className="group relative w-full py-6 bg-gold hover:bg-gold-light text-gold-dark font-bold text-lg tracking-wider overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
               <span className="relative z-10">
                 {isSubmitting ? (
@@ -241,7 +343,7 @@ export default function Contact() {
                   'SEND MESSAGE'
                 )}
               </span>
-            </motion.button>
+            </button>
           </form>
         </div>
       </div>

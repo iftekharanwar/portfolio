@@ -149,13 +149,14 @@ export default function Blog() {
 
         {/* Blog Grid */}
         <div className="blog-grid grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {recentPosts.map((post) => (
+          {recentPosts.map((post, index) => (
             <BlogCard
               key={post.id}
               post={post}
               isHovered={hoveredCard === post.id}
               onHover={() => setHoveredCard(post.id)}
               onLeave={() => setHoveredCard(null)}
+              priority={index < 3}
             />
           ))}
         </div>
@@ -183,11 +184,13 @@ function BlogCard({
   isHovered,
   onHover,
   onLeave,
+  priority = false,
 }: {
   post: BlogPost;
   isHovered: boolean;
   onHover: () => void;
   onLeave: () => void;
+  priority?: boolean;
 }) {
   const imageRef = useRef<HTMLDivElement>(null);
 
@@ -213,7 +216,7 @@ function BlogCard({
                 isHovered ? 'scale-110 brightness-75' : 'scale-100'
               }`}
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              loading="lazy"
+              {...(priority ? { priority: true } : { loading: 'lazy' as const })}
               quality={75}
             />
           </div>
