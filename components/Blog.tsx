@@ -21,11 +21,12 @@ export default function Blog() {
         scrollTrigger: {
           trigger: '.blog-title',
           start: 'top 80%',
+          once: true,
         },
-        y: 100,
+        y: 60,
         opacity: 0,
-        duration: 1.2,
-        ease: 'power4.out',
+        duration: 0.8,
+        ease: 'power3.out',
       });
 
       // Stagger blog card reveals
@@ -33,25 +34,13 @@ export default function Blog() {
         scrollTrigger: {
           trigger: '.blog-grid',
           start: 'top 75%',
+          once: true,
         },
-        y: 120,
+        y: 50,
         opacity: 0,
-        stagger: 0.15,
-        duration: 1,
-        ease: 'power3.out',
-      });
-
-      // Category filter animation
-      gsap.from('.category-tag', {
-        scrollTrigger: {
-          trigger: '.category-filter',
-          start: 'top 85%',
-        },
-        scale: 0,
-        opacity: 0,
-        stagger: 0.05,
+        stagger: 0.08,
         duration: 0.6,
-        ease: 'back.out(1.7)',
+        ease: 'power2.out',
       });
     }, sectionRef);
 
@@ -95,11 +84,7 @@ export default function Blog() {
         {/* Featured Post - Hero Style */}
         {featuredPost && (
           <Link href={`/blog/${featuredPost.slug}`}>
-            <motion.div
-              className="relative mb-32 group cursor-pointer overflow-hidden"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-            >
+            <div className="relative mb-32 group cursor-pointer overflow-hidden transition-transform duration-500 hover:scale-[1.01]">
               {/* Image */}
               <div className="relative h-[70vh] overflow-hidden">
                 <Image
@@ -140,7 +125,7 @@ export default function Blog() {
                   <span className="text-2xl">→</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </Link>
         )}
 
@@ -160,21 +145,17 @@ export default function Blog() {
         {/* View All CTA */}
         <div className="text-center mt-24">
           <Link href="/blog">
-            <motion.button
-              className="group px-12 py-6 bg-transparent border-4 border-gold text-gold font-bold text-lg tracking-widest uppercase hover:bg-gold hover:text-gold-dark transition-all duration-500"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <button className="group px-12 py-6 bg-transparent border-4 border-gold text-gold font-bold text-lg tracking-widest uppercase hover:bg-gold hover:text-gold-dark transition-all duration-500 hover:scale-105 active:scale-95">
               VIEW ALL ARTICLES
               <span className="inline-block ml-4 group-hover:translate-x-2 transition-transform duration-300">→</span>
-            </motion.button>
+            </button>
           </Link>
         </div>
       </div>
 
       {/* Floating shapes */}
-      <div className="absolute bottom-32 left-20 w-96 h-96 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-32 right-20 w-64 h-64 bg-gold-light/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-32 left-20 w-96 h-96 bg-gold/10 rounded-full blur-2xl pointer-events-none will-change-transform" />
+      <div className="absolute top-32 right-20 w-64 h-64 bg-gold-light/10 rounded-full blur-2xl pointer-events-none will-change-transform" />
     </section>
   );
 }
@@ -190,40 +171,15 @@ function BlogCard({
   onHover: () => void;
   onLeave: () => void;
 }) {
-  const cardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  // Magnetic effect on hover
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
-    setMousePos({ x, y });
-  };
-
-  const handleMouseLeave = () => {
-    setMousePos({ x: 0, y: 0 });
-  };
 
   return (
     <Link href={`/blog/${post.slug}`}>
-      <motion.div
-        ref={cardRef}
-        className="blog-card group relative cursor-pointer"
+      <div
+        className="blog-card group relative cursor-pointer transition-transform duration-300 hover:-translate-y-2"
         onMouseEnter={onHover}
-        onMouseLeave={() => {
-          onLeave();
-          handleMouseLeave();
-        }}
-        onMouseMove={handleMouseMove}
+        onMouseLeave={onLeave}
         data-cursor-hover
-        animate={{
-          x: mousePos.x,
-          y: mousePos.y,
-        }}
-        transition={{ type: 'spring', stiffness: 150, damping: 15 }}
       >
         {/* Image */}
         <div className="relative h-[400px] overflow-hidden mb-6">
@@ -299,7 +255,7 @@ function BlogCard({
             <span className="text-xl">→</span>
           </div>
         </div>
-      </motion.div>
+      </div>
     </Link>
   );
 }

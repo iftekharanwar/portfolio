@@ -90,44 +90,45 @@ export default function Process() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 60%',
+          once: true,
         },
         scaleY: 0,
-        duration: 2,
+        duration: 1.2,
         ease: 'power3.inOut',
       });
 
-      // Animate each step
+      // Animate all steps at once with stagger
       const steps = document.querySelectorAll('.process-step');
       if (steps && steps.length > 0) {
-        steps.forEach((step, index) => {
-          // Step entrance
-          gsap.from(step, {
-            scrollTrigger: {
-              trigger: step,
-              start: 'top 80%',
-            },
-            x: index % 2 === 0 ? -100 : 100,
-            opacity: 0,
-            duration: 1,
-            ease: 'power3.out',
-          });
-
-          // Icon animation
-          const icon = step.querySelector('.step-icon');
-          if (icon) {
-            gsap.from(icon, {
-              scrollTrigger: {
-                trigger: step,
-                start: 'top 75%',
-              },
-              scale: 0,
-              rotation: 180,
-              duration: 0.8,
-              delay: 0.3,
-              ease: 'back.out(1.7)',
-            });
-          }
+        gsap.from(steps, {
+          scrollTrigger: {
+            trigger: timelineRef.current,
+            start: 'top 70%',
+            once: true,
+          },
+          y: 50,
+          opacity: 0,
+          stagger: 0.12,
+          duration: 0.6,
+          ease: 'power2.out',
         });
+
+        const icons = document.querySelectorAll('.step-icon');
+        if (icons && icons.length > 0) {
+          gsap.from(icons, {
+            scrollTrigger: {
+              trigger: timelineRef.current,
+              start: 'top 70%',
+              once: true,
+            },
+            scale: 0,
+            rotation: 180,
+            stagger: 0.12,
+            duration: 0.5,
+            delay: 0.15,
+            ease: 'back.out(1.5)',
+          });
+        }
       }
     }, sectionRef);
 
@@ -174,8 +175,8 @@ export default function Process() {
       </div>
 
       {/* Decorative elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-gold/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-20 w-96 h-96 bg-gold-light/10 blur-3xl" />
+      <div className="absolute top-20 right-20 w-64 h-64 bg-gold/5 rounded-full blur-2xl pointer-events-none" />
+      <div className="absolute bottom-20 left-20 w-96 h-96 bg-gold-light/10 blur-2xl pointer-events-none" />
     </section>
   );
 }
@@ -225,8 +226,8 @@ function ProcessStepItem({ step, index }: { step: ProcessStep; index: number }) 
             <div className="step-icon relative w-32 h-32 lg:w-40 lg:h-40 bg-gold-dark rounded-full flex items-center justify-center text-cream p-8 shadow-2xl">
               {step.icon}
 
-              {/* Animated ring */}
-              <div className="absolute inset-0 rounded-full border-4 border-gold animate-pulse" />
+              {/* Static ring */}
+              <div className="absolute inset-0 rounded-full border-4 border-gold opacity-50" />
             </div>
 
             {/* Connection dot for timeline */}
