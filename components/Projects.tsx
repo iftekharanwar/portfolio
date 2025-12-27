@@ -299,7 +299,7 @@ function ProjectItem({
           </div>
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-2 pt-8 border-t border-gold/20">
+          <div className="flex flex-wrap gap-2 pt-6 md:pt-8 pb-8 md:pb-0 border-t border-gold/20">
             {project.tags.slice(0, 4).map((tag, idx) => (
               <span
                 key={idx}
