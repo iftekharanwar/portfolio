@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import Link from 'next/link';
-import { projects } from '@/data/projects';
+import { projects, ProjectData } from '@/data/projects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -103,7 +103,7 @@ function ProjectItem({
   onHover,
   onLeave,
 }: {
-  project: any;
+  project: ProjectData;
   index: number;
   isHovered: boolean;
   onHover: () => void;

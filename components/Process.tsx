@@ -10,7 +10,7 @@ interface ProcessStep {
   number: string;
   title: string;
   description: string;
-  icon: JSX.Element;
+  icon: React.ReactElement;
 }
 
 const processSteps: ProcessStep[] = [

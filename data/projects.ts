@@ -75,7 +75,7 @@ export const projects: ProjectData[] = [
   
     challenge: 'The Ministry provided large 2D image datasets of cultural heritage objects. The task was to convert these into accurate, interactive 3D models and make them accessible across iPhone, iPad, Mac, Vision Pro, and a web platform, all in just a few days.',
   
-    solution: 'We developed a custom algorithm** to generate 3D models from 2D images and built a full iOS app ecosystem along with a **website showpiece. The app includes AR features allowing users to place and interact with models anywhere, providing an educational and engaging experience. The website serves as an educational showcase for schools and museums.',
+    solution: 'We developed a custom algorithm to generate 3D models from 2D images and built a full iOS app ecosystem along with a website showpiece. The app includes AR features allowing users to place and interact with models anywhere, providing an educational and engaging experience. The website serves as an educational showcase for schools and museums.',
   
     gallery: [
       { url: '/images/projects/project-01-gallery-1.png', caption: '3D Model Generated from 2D Dataset' },
@@ -132,7 +132,7 @@ export const projects: ProjectData[] = [
   
     challenge: 'Tourism can be difficult to navigate for people with disabilities due to physical barriers, lack of information, and limited digital tools. The challenge was to create a solution that empowers all travelers to explore Trieste comfortably and safely.',
   
-    solution: 'We developed a user-centered iOS app that provides accessible travel routes, venue information, and real-time assistance features. We conducted **interviews and workshops** with people with disabilities to co-design the experience, ensuring that every feature directly met real user needs.',
+    solution: 'We developed a user-centered iOS app that provides accessible travel routes, venue information, and real-time assistance features. We conducted interviews and workshops with people with disabilities to co-design the experience, ensuring that every feature directly met real user needs.',
   
     gallery: [
       { url: '/images/projects/project-02-gallery-1.jpg', caption: 'iOS App Interface – Accessible Routes' },

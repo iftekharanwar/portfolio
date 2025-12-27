@@ -17,64 +17,74 @@ export default function Hero() {
     const ctx = gsap.context(() => {
       // Dramatic entrance - main title
       const titleLines = mainTitleRef.current?.querySelectorAll('.title-line');
-      gsap.from(titleLines, {
-        y: 200,
-        opacity: 0,
-        rotateX: -90,
-        stagger: 0.2,
-        duration: 1.5,
-        ease: 'power4.out',
-        delay: 0.5,
-      });
+      if (titleLines && titleLines.length > 0) {
+        gsap.from(titleLines, {
+          y: 200,
+          opacity: 0,
+          rotateX: -90,
+          stagger: 0.2,
+          duration: 1.5,
+          ease: 'power4.out',
+          delay: 0.5,
+        });
+      }
 
       // Subtext reveal
-      gsap.from(subTextRef.current, {
-        opacity: 0,
-        x: -100,
-        duration: 1.2,
-        delay: 1.8,
-        ease: 'power3.out',
-      });
+      if (subTextRef.current) {
+        gsap.from(subTextRef.current, {
+          opacity: 0,
+          x: -100,
+          duration: 1.2,
+          delay: 1.8,
+          ease: 'power3.out',
+        });
+      }
 
       // Image mask reveal
-      gsap.from(imageMaskRef.current, {
-        clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
-        duration: 1.8,
-        delay: 1.2,
-        ease: 'power4.inOut',
-      });
+      if (imageMaskRef.current) {
+        gsap.from(imageMaskRef.current, {
+          clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
+          duration: 1.8,
+          delay: 1.2,
+          ease: 'power4.inOut',
+        });
+      }
 
       // Floating elements animation
       const floatingItems = floatingElementsRef.current?.querySelectorAll('.float-item');
-      floatingItems?.forEach((item, index) => {
-        gsap.to(item, {
-          y: -30,
-          repeat: -1,
-          yoyo: true,
-          duration: 2 + index * 0.5,
-          ease: 'sine.inOut',
-          delay: index * 0.3,
-        });
+      if (floatingItems && floatingItems.length > 0) {
+        floatingItems.forEach((item, index) => {
+          gsap.to(item, {
+            y: -30,
+            repeat: -1,
+            yoyo: true,
+            duration: 2 + index * 0.5,
+            ease: 'sine.inOut',
+            delay: index * 0.3,
+          });
 
-        gsap.to(item, {
-          rotate: 360,
-          repeat: -1,
-          duration: 20 + index * 5,
-          ease: 'none',
+          gsap.to(item, {
+            rotate: 360,
+            repeat: -1,
+            duration: 20 + index * 5,
+            ease: 'none',
+          });
         });
-      });
+      }
 
       // Parallax scroll
-      gsap.to(heroRef.current, {
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-        scale: 0.9,
-        opacity: 0.3,
-      });
+      if (heroRef.current) {
+        gsap.to(heroRef.current, {
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+          scale: 0.9,
+          opacity: 0.3,
+        });
+      }
     }, heroRef);
 
     return () => ctx.revert();

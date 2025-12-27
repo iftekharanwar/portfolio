@@ -66,7 +66,7 @@ export default function ScrollProgress() {
           {/* Percentage */}
           <div className="absolute inset-0 flex items-center justify-center">
             <motion.span className="text-xs font-bold text-cream">
-              {Math.round(scrollYProgress.get() * 100)}%
+              {Math.round((scrollYProgress.get() ?? 0) * 100)}%
             </motion.span>
           </div>
         </div>
