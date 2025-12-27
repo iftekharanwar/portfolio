@@ -6,43 +6,60 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import Link from 'next/link';
 import { projects, ProjectData } from '@/data/projects';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title animation
-      gsap.from('.projects-title', {
-        scrollTrigger: {
-          trigger: '.projects-title',
-          start: 'top 80%',
-        },
-        y: 100,
-        opacity: 0,
-        duration: 1.2,
-        ease: 'power4.out',
-      });
+      try {
+        if (prefersReducedMotion) {
+          gsap.set(['.projects-title', '.project-item'], {
+            opacity: 1,
+            y: 0,
+          });
+          return;
+        }
+        // Title animation
+        gsap.from('.projects-title', {
+          scrollTrigger: {
+            trigger: '.projects-title',
+            start: 'top 80%',
+          },
+          y: 100,
+          opacity: 0,
+          duration: 1.2,
+          ease: 'power4.out',
+        });
 
-      // Stagger project reveals
-      gsap.from('.project-item', {
-        scrollTrigger: {
-          trigger: '.project-item',
-          start: 'top 85%',
-        },
-        y: 150,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 1,
-        ease: 'power3.out',
-      });
+        // Stagger project reveals
+        gsap.from('.project-item', {
+          scrollTrigger: {
+            trigger: '.project-item',
+            start: 'top 85%',
+          },
+          y: 150,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 1,
+          ease: 'power3.out',
+        });
+      } catch (error) {
+        console.error('Projects animation error:', error);
+        gsap.set(['.projects-title', '.project-item'], {
+          opacity: 1,
+          y: 0,
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <section id="projects" ref={sectionRef} className="relative py-32 px-6 md:px-12 bg-cream overflow-hidden">

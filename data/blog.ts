@@ -193,7 +193,7 @@ export const blogPosts: BlogPost[] = [
       coverImage: '/images/blog/blog-04-cover.jpg',
       author: {
         name: 'Iftekhar Anwar',
-        avatar: '/images/blog/author-avatar.jpg',
+        avatar: '/images/blog/author-avatar.jpeg',
       },
       featured: false,
     

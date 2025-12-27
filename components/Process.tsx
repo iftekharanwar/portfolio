@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -82,11 +83,23 @@ const processSteps: ProcessStep[] = [
 export default function Process() {
   const sectionRef = useRef<HTMLElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate timeline line
-      gsap.from('.timeline-line', {
+      try {
+        if (prefersReducedMotion) {
+          gsap.set(['.timeline-line', '.process-step', '.step-icon'], {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotation: 0,
+            scaleY: 1,
+          });
+          return;
+        }
+        // Animate timeline line
+        gsap.from('.timeline-line', {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 60%',
@@ -130,10 +143,20 @@ export default function Process() {
           });
         }
       }
+      } catch (error) {
+        console.error('Process animation error:', error);
+        gsap.set(['.timeline-line', '.process-step', '.step-icon'], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          scaleY: 1,
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <section ref={sectionRef} id="process" className="relative py-32 px-6 md:px-12 bg-cream overflow-hidden">

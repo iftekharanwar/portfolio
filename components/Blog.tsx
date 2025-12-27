@@ -3,21 +3,30 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { blogPosts } from '@/data/blog';
+import { blogPosts, BlogPost } from '@/data/blog';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Blog() {
   const sectionRef = useRef<HTMLElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title animation
-      gsap.from('.blog-title', {
+      try {
+        if (prefersReducedMotion) {
+          gsap.set(['.blog-title', '.blog-card'], {
+            opacity: 1,
+            y: 0,
+          });
+          return;
+        }
+        // Title animation
+        gsap.from('.blog-title', {
         scrollTrigger: {
           trigger: '.blog-title',
           start: 'top 80%',
@@ -42,10 +51,17 @@ export default function Blog() {
         duration: 0.6,
         ease: 'power2.out',
       });
+      } catch (error) {
+        console.error('Blog animation error:', error);
+        gsap.set(['.blog-title', '.blog-card'], {
+          opacity: 1,
+          y: 0,
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   const featuredPost = blogPosts.find(post => post.featured);
   const recentPosts = blogPosts.slice(0, 6);
@@ -168,7 +184,7 @@ function BlogCard({
   onHover,
   onLeave,
 }: {
-  post: any;
+  post: BlogPost;
   isHovered: boolean;
   onHover: () => void;
   onLeave: () => void;

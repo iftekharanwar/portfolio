@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,11 +12,23 @@ export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Only pin on desktop (lg breakpoint)
-      const mm = gsap.matchMedia();
+      try {
+        if (prefersReducedMotion) {
+          gsap.set(['.about-text-line', '.stat-number'], {
+            opacity: 1,
+            y: 0,
+          });
+          if (imageContainerRef.current) {
+            gsap.set(imageContainerRef.current, { opacity: 1, y: 0 });
+          }
+          return;
+        }
+        // Only pin on desktop (lg breakpoint)
+        const mm = gsap.matchMedia();
 
       mm.add("(min-width: 1024px)", () => {
         ScrollTrigger.create({
@@ -80,10 +93,20 @@ export default function About() {
           });
         });
       }
+      } catch (error) {
+        console.error('About animation error:', error);
+        gsap.set(['.about-text-line', '.stat-number'], {
+          opacity: 1,
+          y: 0,
+        });
+        if (imageContainerRef.current) {
+          gsap.set(imageContainerRef.current, { opacity: 1, y: 0 });
+        }
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <section ref={sectionRef} id="about" className="relative min-h-screen bg-gold-dark overflow-hidden">

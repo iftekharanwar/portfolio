@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { blogPosts } from '@/data/blog';
+import { blogPosts, BlogPost } from '@/data/blog';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,11 +15,20 @@ export default function BlogPage() {
   const sectionRef = useRef<HTMLElement>(null);
   const router = useRouter();
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero animation
-      gsap.from('.blog-hero-text', {
+      try {
+        if (prefersReducedMotion) {
+          gsap.set(['.blog-hero-text', '.blog-card'], {
+            opacity: 1,
+            y: 0,
+          });
+          return;
+        }
+        // Hero animation
+        gsap.from('.blog-hero-text', {
         y: 30,
         opacity: 0,
         duration: 0.5,
@@ -39,10 +48,17 @@ export default function BlogPage() {
         duration: 0.4,
         ease: 'power2.out',
       });
+      } catch (error) {
+        console.error('Blog page animation error:', error);
+        gsap.set(['.blog-hero-text', '.blog-card'], {
+          opacity: 1,
+          y: 0,
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <main ref={sectionRef} className="bg-cream min-h-screen">
@@ -143,7 +159,7 @@ function BlogCard({
   onHover,
   onLeave,
 }: {
-  post: any;
+  post: BlogPost;
   isHovered: boolean;
   onHover: () => void;
   onLeave: () => void;

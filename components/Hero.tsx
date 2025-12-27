@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,22 +13,35 @@ export default function Hero() {
   const subTextRef = useRef<HTMLDivElement>(null);
   const imageMaskRef = useRef<HTMLDivElement>(null);
   const floatingElementsRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Dramatic entrance - main title
-      const titleLines = mainTitleRef.current?.querySelectorAll('.title-line');
-      if (titleLines && titleLines.length > 0) {
-        gsap.from(titleLines, {
-          y: 200,
-          opacity: 0,
-          rotateX: -90,
-          stagger: 0.2,
-          duration: 1.5,
-          ease: 'power4.out',
-          delay: 0.5,
-        });
-      }
+      try {
+        if (prefersReducedMotion) {
+          gsap.set(['.title-line', '.hero-subtext', '.hero-image-mask', '.floating-shape'], {
+            opacity: 1,
+            y: 0,
+            x: 0,
+            scale: 1,
+            rotateX: 0,
+          });
+          return;
+        }
+
+        // Dramatic entrance - main title
+        const titleLines = mainTitleRef.current?.querySelectorAll('.title-line');
+        if (titleLines && titleLines.length > 0) {
+          gsap.from(titleLines, {
+            y: 200,
+            opacity: 0,
+            rotateX: -90,
+            stagger: 0.2,
+            duration: 1.5,
+            ease: 'power4.out',
+            delay: 0.5,
+          });
+        }
 
       // Subtext reveal
       if (subTextRef.current) {
@@ -85,10 +99,19 @@ export default function Hero() {
           opacity: 0.3,
         });
       }
+      } catch (error) {
+        console.error('Hero animation error:', error);
+        gsap.set(['.title-line', '.hero-subtext', '.hero-image-mask', '.floating-shape'], {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          scale: 1,
+        });
+      }
     }, heroRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <section
