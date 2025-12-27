@@ -92,6 +92,8 @@ export default function Blog() {
                   alt={featuredPost.title}
                   fill
                   className="object-cover transition-all duration-1000 group-hover:scale-110"
+                  priority
+                  quality={85}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gold-dark via-gold-dark/60 to-transparent" />
               </div>
@@ -195,6 +197,8 @@ function BlogCard({
                 isHovered ? 'scale-110 brightness-75' : 'scale-100'
               }`}
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              loading="lazy"
+              quality={75}
             />
           </div>
 

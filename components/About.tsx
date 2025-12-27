@@ -14,39 +14,50 @@ export default function About() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Pin section while scrolling
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: 'bottom bottom',
-        pin: '.about-content',
-        pinSpacing: false,
+      // Only pin on desktop (lg breakpoint)
+      const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 1024px)", () => {
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom bottom',
+          pin: '.about-content',
+          pinSpacing: false,
+        });
       });
 
-      // Image reveal animation
-      gsap.from(imageContainerRef.current, {
-        scrollTrigger: {
-          trigger: imageContainerRef.current,
-          start: 'top 80%',
-        },
-        scale: 0.8,
-        opacity: 0,
-        duration: 1.5,
-        ease: 'power4.out',
-      });
+      // Simplified animations for better mobile performance
+      if (imageContainerRef.current) {
+        gsap.from(imageContainerRef.current, {
+          scrollTrigger: {
+            trigger: imageContainerRef.current,
+            start: 'top 80%',
+            once: true,
+          },
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+        });
+      }
 
       // Text animations
-      gsap.from('.about-text-line', {
-        scrollTrigger: {
-          trigger: textRef.current,
-          start: 'top 75%',
-        },
-        y: 100,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 1,
-        ease: 'power3.out',
-      });
+      const textLines = document.querySelectorAll('.about-text-line');
+      if (textLines && textLines.length > 0) {
+        gsap.from(textLines, {
+          scrollTrigger: {
+            trigger: textRef.current,
+            start: 'top 75%',
+            once: true,
+          },
+          y: 40,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 0.6,
+          ease: 'power2.out',
+        });
+      }
 
       // Stats counter animation
       const stats = document.querySelectorAll('.stat-number');
@@ -56,10 +67,11 @@ export default function About() {
           gsap.from(stat, {
             scrollTrigger: {
               trigger: stat,
-              start: 'top 80%',
+              start: 'top 85%',
+              once: true,
             },
             textContent: 0,
-            duration: 2,
+            duration: 1.5,
             ease: 'power1.out',
             snap: { textContent: 1 },
             onUpdate: function () {
