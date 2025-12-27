@@ -50,22 +50,24 @@ export default function About() {
 
       // Stats counter animation
       const stats = document.querySelectorAll('.stat-number');
-      stats.forEach((stat) => {
-        const target = parseInt(stat.getAttribute('data-target') || '0');
-        gsap.from(stat, {
-          scrollTrigger: {
-            trigger: stat,
-            start: 'top 80%',
-          },
-          textContent: 0,
-          duration: 2,
-          ease: 'power1.out',
-          snap: { textContent: 1 },
-          onUpdate: function () {
-            stat.textContent = Math.ceil(parseFloat(stat.textContent as string)).toString() + '+';
-          },
+      if (stats && stats.length > 0) {
+        stats.forEach((stat) => {
+          const target = parseInt(stat.getAttribute('data-target') || '0');
+          gsap.from(stat, {
+            scrollTrigger: {
+              trigger: stat,
+              start: 'top 80%',
+            },
+            textContent: 0,
+            duration: 2,
+            ease: 'power1.out',
+            snap: { textContent: 1 },
+            onUpdate: function () {
+              stat.textContent = Math.ceil(parseFloat(stat.textContent as string)).toString() + '+';
+            },
+          });
         });
-      });
+      }
     }, sectionRef);
 
     return () => ctx.revert();

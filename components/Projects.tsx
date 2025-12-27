@@ -247,16 +247,16 @@ function ProjectItem({
             </div>
           </div>
 
-          {/* Stats/Tags */}
-          <div className="flex gap-6 pt-8 border-t border-gold/20">
-            <div>
-              <div className="text-2xl font-bold text-gold-dark">15K</div>
-              <div className="text-xs text-gold-dark/50 uppercase tracking-wider">Views</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-gold-dark">98%</div>
-              <div className="text-xs text-gold-dark/50 uppercase tracking-wider">Satisfaction</div>
-            </div>
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 pt-8 border-t border-gold/20">
+            {project.tags.slice(0, 4).map((tag, idx) => (
+              <span
+                key={idx}
+                className="px-3 py-1 text-xs text-gold-dark/70 border border-gold/30 tracking-wider uppercase"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
         </div>
       </div>

@@ -98,33 +98,37 @@ export default function Process() {
 
       // Animate each step
       const steps = document.querySelectorAll('.process-step');
-      steps.forEach((step, index) => {
-        // Step entrance
-        gsap.from(step, {
-          scrollTrigger: {
-            trigger: step,
-            start: 'top 80%',
-          },
-          x: index % 2 === 0 ? -100 : 100,
-          opacity: 0,
-          duration: 1,
-          ease: 'power3.out',
-        });
+      if (steps && steps.length > 0) {
+        steps.forEach((step, index) => {
+          // Step entrance
+          gsap.from(step, {
+            scrollTrigger: {
+              trigger: step,
+              start: 'top 80%',
+            },
+            x: index % 2 === 0 ? -100 : 100,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+          });
 
-        // Icon animation
-        const icon = step.querySelector('.step-icon');
-        gsap.from(icon, {
-          scrollTrigger: {
-            trigger: step,
-            start: 'top 75%',
-          },
-          scale: 0,
-          rotation: 180,
-          duration: 0.8,
-          delay: 0.3,
-          ease: 'back.out(1.7)',
+          // Icon animation
+          const icon = step.querySelector('.step-icon');
+          if (icon) {
+            gsap.from(icon, {
+              scrollTrigger: {
+                trigger: step,
+                start: 'top 75%',
+              },
+              scale: 0,
+              rotation: 180,
+              duration: 0.8,
+              delay: 0.3,
+              ease: 'back.out(1.7)',
+            });
+          }
         });
-      });
+      }
     }, sectionRef);
 
     return () => ctx.revert();

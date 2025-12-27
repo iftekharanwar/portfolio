@@ -13,19 +13,32 @@ export default function CustomCursor() {
 
     if (!cursor || !cursorDot) return;
 
-    const moveCursor = (e: MouseEvent) => {
-      gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.5,
-        ease: 'power2.out',
-      });
+    let animationFrameId: number;
+    let mouseX = 0;
+    let mouseY = 0;
 
-      gsap.to(cursorDot, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.1,
-      });
+    const moveCursor = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (!animationFrameId) {
+        animationFrameId = requestAnimationFrame(() => {
+          gsap.to(cursor, {
+            x: mouseX,
+            y: mouseY,
+            duration: 0.5,
+            ease: 'power2.out',
+          });
+
+          gsap.to(cursorDot, {
+            x: mouseX,
+            y: mouseY,
+            duration: 0.1,
+          });
+
+          animationFrameId = 0;
+        });
+      }
     };
 
     const handleMouseEnter = () => {

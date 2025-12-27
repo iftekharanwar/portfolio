@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 
 export default function ScrollProgress() {
@@ -13,18 +13,27 @@ export default function ScrollProgress() {
 
   const [isVisible, setIsVisible] = useState(false);
 
+  const handleScroll = useCallback(() => {
+    const scrolled = window.scrollY > 100;
+    setIsVisible(prev => prev !== scrolled ? scrolled : prev);
+  }, []);
+
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+    // Throttle scroll events for better performance
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [handleScroll]);
 
   return (
     <>

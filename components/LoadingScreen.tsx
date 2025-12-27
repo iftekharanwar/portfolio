@@ -8,21 +8,18 @@ export default function LoadingScreen() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    // Counter animation
     const interval = setInterval(() => {
       setCount((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
           return 100;
         }
-        return prev + 1;
+        return Math.min(prev + 2, 100);
       });
-    }, 20);
-
-    // Hide loading screen after counter reaches 100
+    }, 15);
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2200);
+    }, 1200);
 
     return () => {
       clearInterval(interval);
@@ -39,20 +36,9 @@ export default function LoadingScreen() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: 'easeInOut' }}
         >
-          {/* Background animated gradient */}
+          {/* Background gradient static for performance */}
           <div className="absolute inset-0">
-            <motion.div
-              className="absolute inset-0 bg-gradient-radial from-gold/20 via-transparent to-transparent"
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
+            <div className="absolute inset-0 bg-gradient-radial from-gold/20 via-transparent to-transparent opacity-50" />
           </div>
 
           {/* Main Content */}
@@ -126,23 +112,11 @@ export default function LoadingScreen() {
           </div>
 
           {/* Decorative elements */}
-          <motion.div
-            className="absolute top-20 left-20 w-32 h-32 border-4 border-gold-light/20 rounded-full"
-            animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-          />
-
-          <motion.div
-            className="absolute bottom-20 right-20 w-48 h-48 border-4 border-cream/10"
-            animate={{ rotate: -360, scale: [1, 0.8, 1] }}
-            transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-          />
-
-          <motion.div
+          <div className="absolute top-20 left-20 w-32 h-32 border-4 border-gold-light/20 rounded-full" />
+          <div className="absolute bottom-20 right-20 w-48 h-48 border-4 border-cream/10" />
+          <div
             className="absolute top-1/2 right-1/4 w-24 h-24 bg-gold/10 backdrop-blur-sm"
             style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
           />
         </motion.div>
       )}
