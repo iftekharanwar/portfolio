@@ -13,7 +13,7 @@ export default function CustomCursor() {
 
     if (!cursor || !cursorDot) return;
 
-    let animationFrameId: number;
+    let animationFrameId: number | null = null;
     let mouseX = 0;
     let mouseY = 0;
 
@@ -21,8 +21,10 @@ export default function CustomCursor() {
       mouseX = e.clientX;
       mouseY = e.clientY;
 
-      if (!animationFrameId) {
+      if (animationFrameId === null) {
         animationFrameId = requestAnimationFrame(() => {
+          if (!cursor || !cursorDot) return;
+
           gsap.to(cursor, {
             x: mouseX,
             y: mouseY,
@@ -36,12 +38,13 @@ export default function CustomCursor() {
             duration: 0.1,
           });
 
-          animationFrameId = 0;
+          animationFrameId = null;
         });
       }
     };
 
     const handleMouseEnter = () => {
+      if (!cursor) return;
       gsap.to(cursor, {
         scale: 1.5,
         borderColor: 'var(--gold)',
@@ -50,6 +53,7 @@ export default function CustomCursor() {
     };
 
     const handleMouseLeave = () => {
+      if (!cursor) return;
       gsap.to(cursor, {
         scale: 1,
         borderColor: 'var(--gold-light)',
@@ -68,6 +72,11 @@ export default function CustomCursor() {
     window.addEventListener('mousemove', moveCursor);
 
     return () => {
+      // Cancel pending animation frame
+      if (animationFrameId !== null) {
+        cancelAnimationFrame(animationFrameId);
+      }
+
       window.removeEventListener('mousemove', moveCursor);
       interactiveElements.forEach((el) => {
         el.removeEventListener('mouseenter', handleMouseEnter);
@@ -87,6 +96,7 @@ export default function CustomCursor() {
           borderRadius: '50%',
           mixBlendMode: 'difference',
         }}
+        aria-hidden="true"
       />
 
       {/* Cursor dot */}
@@ -97,6 +107,7 @@ export default function CustomCursor() {
           backgroundColor: 'var(--gold)',
           borderRadius: '50%',
         }}
+        aria-hidden="true"
       />
     </>
   );

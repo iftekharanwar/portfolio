@@ -99,21 +99,27 @@ export default function Navbar() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5"
             data-cursor-hover
+            aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
           >
             <span
               className={`w-6 h-0.5 bg-cream transition-all duration-300 ${
                 isMenuOpen ? 'rotate-45 translate-y-2' : ''
               }`}
+              aria-hidden="true"
             />
             <span
               className={`w-6 h-0.5 bg-cream transition-all duration-300 ${
                 isMenuOpen ? 'opacity-0' : ''
               }`}
+              aria-hidden="true"
             />
             <span
               className={`w-6 h-0.5 bg-cream transition-all duration-300 ${
                 isMenuOpen ? '-rotate-45 -translate-y-2' : ''
               }`}
+              aria-hidden="true"
             />
           </button>
         </div>
@@ -121,9 +127,11 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
+        id="mobile-menu"
         className={`fixed inset-0 bg-gold-dark z-40 lg:hidden transition-all duration-500 ${
           isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
+        aria-hidden={!isMenuOpen}
       >
         <div className="flex flex-col items-center justify-center h-full gap-8">
           {menuItems.map((item, index) => (

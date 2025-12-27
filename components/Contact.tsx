@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import toast from 'react-hot-toast';
+import DOMPurify from 'dompurify';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import {
   ANIMATION_DURATION,
@@ -28,6 +29,7 @@ export default function Contact() {
     email: '',
     message: '',
   });
+  const [honeypot, setHoneypot] = useState(''); // Bot detection
   const [errors, setErrors] = useState<FormErrors>({});
   const [focused, setFocused] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -84,7 +86,15 @@ export default function Contact() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    // Sanitize input to prevent XSS attacks
+    const sanitizedValue = DOMPurify.sanitize(value, {
+      ALLOWED_TAGS: [],
+      ALLOWED_ATTR: []
+    });
+
+    setFormData({ ...formData, [name]: sanitizedValue });
+
     // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors({ ...errors, [name]: undefined });
@@ -124,6 +134,26 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Honeypot check (if filled, it's a bot)
+    if (honeypot) {
+      console.warn('Bot detected via honeypot');
+      // Silently fail for bots
+      setIsSubmitting(true);
+      setTimeout(() => {
+        setIsSubmitting(false);
+        toast.success('Message sent successfully!', {
+          duration: 3000,
+          style: {
+            background: '#C9A961',
+            color: '#1a1612',
+            fontWeight: 'bold',
+            padding: '16px 24px',
+          },
+        });
+      }, 1000);
+      return;
+    }
 
     // Validate form
     if (!validateForm()) {
@@ -176,6 +206,11 @@ export default function Contact() {
         throw new Error('Failed to send message');
       }
     } catch (error) {
+      const errorMessage = error instanceof Error
+        ? error.message
+        : 'An unknown error occurred';
+      console.error('Form submission error:', errorMessage);
+
       toast.error('Oops! Something went wrong. Please try again.', {
         duration: 5000,
         style: {
@@ -258,6 +293,20 @@ export default function Contact() {
                   {errors.name}
                 </p>
               )}
+            </div>
+
+            {/* Honeypot Field (hidden from users, visible to bots) */}
+            <div className="absolute opacity-0 pointer-events-none" aria-hidden="true">
+              <label htmlFor="website">Website</label>
+              <input
+                type="text"
+                id="website"
+                name="website"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+              />
             </div>
 
             {/* Email Field */}
