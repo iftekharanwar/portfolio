@@ -241,7 +241,8 @@ function ProjectItem({
                   isHovered ? 'scale-110 brightness-110' : 'scale-100'
                 }`}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 50vw"
-                loading="lazy"
+                priority={index === 0}
+                loading={index === 0 ? undefined : "lazy"}
                 quality={85}
               />
             </div>
