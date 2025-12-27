@@ -76,7 +76,7 @@ export default function Projects() {
         </div>
 
         {/* Projects List - Magazine Style */}
-        <div className="space-y-32">
+        <div className="space-y-24 md:space-y-32 lg:space-y-40">
           {projects.map((project, index) => (
             <ProjectItem
               key={project.id}
@@ -178,7 +178,7 @@ function ProjectItem({
       >
         <div className={`grid lg:grid-cols-2 gap-12 items-center ${!isEven ? 'lg:grid-flow-dense' : ''}`}>
         {/* Image */}
-        <div className={`relative h-[500px] ${!isEven ? 'lg:col-start-2' : ''}`}>
+        <div className={`relative h-[300px] sm:h-[400px] lg:h-[500px] ${!isEven ? 'lg:col-start-2' : ''}`}>
           <div className="relative h-full overflow-hidden">
             <div
               ref={imageRef}
@@ -192,7 +192,9 @@ function ProjectItem({
                 className={`object-cover transition-all duration-700 ${
                   isHovered ? 'scale-110 brightness-110' : 'scale-100'
                 }`}
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 50vw"
+                loading="lazy"
+                quality={85}
               />
             </div>
 

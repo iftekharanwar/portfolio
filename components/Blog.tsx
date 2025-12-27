@@ -99,15 +99,15 @@ export default function Blog() {
               </div>
 
               {/* Content Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-12 md:p-16">
-                <div className="flex items-center gap-6 mb-6">
-                  <span className="px-4 py-2 bg-gold text-gold-dark text-xs font-bold tracking-widest uppercase">
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-12 md:p-16">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-6 mb-6">
+                  <span className="px-3 sm:px-4 py-2 bg-gold text-gold-dark text-xs font-bold tracking-widest uppercase">
                     FEATURED
                   </span>
                   <span className="text-gold-light text-xs tracking-wider uppercase">
                     {featuredPost.category}
                   </span>
-                  <span className="text-cream/50 text-xs">•</span>
+                  <span className="text-cream/50 text-xs hidden sm:inline">•</span>
                   <span className="text-cream/50 text-xs">{featuredPost.readTime}</span>
                 </div>
 

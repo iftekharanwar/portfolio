@@ -208,7 +208,7 @@ export default function About() {
               </div>
 
               {/* CTA */}
-              <div className="about-text-line">
+              <div className="about-text-line pb-8 md:pb-0 text-center md:text-left">
                 <a
                   href="/cv.pdf"
                   download
