@@ -187,7 +187,7 @@ export default function Hero() {
             <div className="flex items-center gap-4">
               <div className="w-16 h-px bg-gold-light" />
               <span className="text-gold-light text-xs tracking-[0.3em] uppercase font-light">
-                Portfolio 2025
+                Portfolio {new Date().getFullYear()}
               </span>
             </div>
 

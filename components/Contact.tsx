@@ -5,6 +5,12 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import toast from 'react-hot-toast';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import {
+  ANIMATION_DURATION,
+  ANIMATION_EASING,
+  ANIMATION_DISTANCE,
+  SCROLL_TRIGGER_START,
+} from '@/lib/animation-constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,27 +48,27 @@ export default function Contact() {
         gsap.from('.contact-heading', {
           scrollTrigger: {
             trigger: '.contact-heading',
-            start: 'top 80%',
+            start: SCROLL_TRIGGER_START.normal,
             once: true,
           },
-          y: 100,
+          y: ANIMATION_DISTANCE.large,
           opacity: 0,
-          duration: 1.2,
-          ease: 'power4.out',
+          duration: ANIMATION_DURATION.slow,
+          ease: ANIMATION_EASING.dramatic,
         });
 
         // Form animation
         gsap.from(formRef.current, {
           scrollTrigger: {
             trigger: formRef.current,
-            start: 'top 75%',
+            start: SCROLL_TRIGGER_START.normal,
             once: true,
           },
-          y: 50,
+          y: ANIMATION_DISTANCE.medium,
           opacity: 0,
-          duration: 1,
-          delay: 0.3,
-          ease: 'power3.out',
+          duration: ANIMATION_DURATION.slow,
+          delay: ANIMATION_DURATION.fast,
+          ease: ANIMATION_EASING.energetic,
         });
       } catch (error) {
         console.error('Contact animation error:', error);

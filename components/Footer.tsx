@@ -3,28 +3,53 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
+import {
+  ANIMATION_DURATION,
+  ANIMATION_EASING,
+  ANIMATION_DISTANCE,
+  SCROLL_TRIGGER_START,
+} from '@/lib/animation-constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from('.footer-content', {
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: 'top 90%',
-        },
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-      });
+      try {
+        if (prefersReducedMotion) {
+          gsap.set('.footer-content', {
+            opacity: 1,
+            y: 0,
+          });
+          return;
+        }
+
+        gsap.from('.footer-content', {
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: 'top 90%',
+            once: true,
+          },
+          y: ANIMATION_DISTANCE.medium,
+          opacity: 0,
+          duration: ANIMATION_DURATION.slow,
+          ease: ANIMATION_EASING.energetic,
+        });
+      } catch (error) {
+        console.error('Footer animation error:', error);
+        gsap.set('.footer-content', {
+          opacity: 1,
+          y: 0,
+        });
+      }
     }, footerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   const currentYear = new Date().getFullYear();
 

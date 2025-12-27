@@ -8,6 +8,13 @@ import Link from 'next/link';
 import { projects, ProjectData } from '@/data/projects';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { DisplayHeading, SectionLabel } from '@/components/ui/Typography';
+import {
+  ANIMATION_DURATION,
+  ANIMATION_EASING,
+  ANIMATION_DISTANCE,
+  STAGGER_DELAY,
+  SCROLL_TRIGGER_START,
+} from '@/lib/animation-constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,25 +37,27 @@ export default function Projects() {
         gsap.from('.projects-title', {
           scrollTrigger: {
             trigger: '.projects-title',
-            start: 'top 80%',
+            start: SCROLL_TRIGGER_START.normal,
+            once: true,
           },
-          y: 100,
+          y: ANIMATION_DISTANCE.large,
           opacity: 0,
-          duration: 1.2,
-          ease: 'power4.out',
+          duration: ANIMATION_DURATION.slow,
+          ease: ANIMATION_EASING.dramatic,
         });
 
         // Stagger project reveals
         gsap.from('.project-item', {
           scrollTrigger: {
             trigger: '.project-item',
-            start: 'top 85%',
+            start: SCROLL_TRIGGER_START.early,
+            once: true,
           },
-          y: 150,
+          y: ANIMATION_DISTANCE.extraLarge,
           opacity: 0,
-          stagger: 0.15,
-          duration: 1,
-          ease: 'power3.out',
+          stagger: STAGGER_DELAY.loose,
+          duration: ANIMATION_DURATION.slow,
+          ease: ANIMATION_EASING.energetic,
         });
       } catch (error) {
         console.error('Projects animation error:', error);

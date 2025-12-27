@@ -5,6 +5,13 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import {
+  ANIMATION_DURATION,
+  ANIMATION_EASING,
+  ANIMATION_DISTANCE,
+  STAGGER_DELAY,
+  SCROLL_TRIGGER_START,
+} from '@/lib/animation-constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,13 +52,13 @@ export default function About() {
         gsap.from(imageContainerRef.current, {
           scrollTrigger: {
             trigger: imageContainerRef.current,
-            start: 'top 80%',
+            start: SCROLL_TRIGGER_START.normal,
             once: true,
           },
-          y: 50,
+          y: ANIMATION_DISTANCE.medium,
           opacity: 0,
-          duration: 0.8,
-          ease: 'power3.out',
+          duration: ANIMATION_DURATION.normal,
+          ease: ANIMATION_EASING.energetic,
         });
       }
 
@@ -61,14 +68,14 @@ export default function About() {
         gsap.from(textLines, {
           scrollTrigger: {
             trigger: textRef.current,
-            start: 'top 75%',
+            start: SCROLL_TRIGGER_START.normal,
             once: true,
           },
-          y: 40,
+          y: ANIMATION_DISTANCE.small,
           opacity: 0,
-          stagger: 0.08,
-          duration: 0.6,
-          ease: 'power2.out',
+          stagger: STAGGER_DELAY.normal,
+          duration: ANIMATION_DURATION.normal,
+          ease: ANIMATION_EASING.smooth,
         });
       }
 
@@ -85,10 +92,10 @@ export default function About() {
             value: target,
             scrollTrigger: {
               trigger: stat,
-              start: 'top 85%',
+              start: SCROLL_TRIGGER_START.early,
               once: true,
             },
-            duration: 1.5,
+            duration: ANIMATION_DURATION.verySlow,
             ease: 'power1.out',
             onUpdate: function () {
               const currentValue = Math.ceil(counter.value);
