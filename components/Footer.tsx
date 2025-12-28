@@ -140,10 +140,10 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center gap-8">
-            <a href="https://www.termsfeed.com/live/b4e4e9c5-8f41-4b3a-9a29-8e3f5a6b7c8d" target="_blank" rel="noopener noreferrer" className="text-cream/50 hover:text-gold-light text-sm transition-colors duration-300">
+            <a href="https://www.termsfeed.com/live/08af88bb-9e63-4129-8f53-5dede3a3d8bd" target="_blank" rel="noopener noreferrer" className="text-cream/50 hover:text-gold-light text-sm transition-colors duration-300">
               Privacy Policy
             </a>
-            <a href="https://www.termsfeed.com/live/c5f5f0d6-9g52-5c4b-0b30-9f4g6b7c8e9e" target="_blank" rel="noopener noreferrer" className="text-cream/50 hover:text-gold-light text-sm transition-colors duration-300">
+            <a href="https://www.termsfeed.com/live/c63079ea-ccba-443f-a416-127686235ac1" target="_blank" rel="noopener noreferrer" className="text-cream/50 hover:text-gold-light text-sm transition-colors duration-300">
               Terms of Service
             </a>
           </div>
