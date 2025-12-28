@@ -66,9 +66,11 @@ body::after {
   background: radial-gradient(circle at 20% 50%, rgba(235, 193, 118, 0.3) 0%, transparent 50%),
               radial-gradient(circle at 80% 80%, rgba(196, 139, 40, 0.4) 0%, transparent 50%),
               radial-gradient(circle at 40% 20%, rgba(255, 245, 225, 0.2) 0%, transparent 50%);
-  animation: gradientShift 15s ease infinite;
+  animation: gradientShift 20s ease infinite;
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 @keyframes gradientShift {
@@ -155,6 +157,38 @@ html {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@keyframes scroll-indicator {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(48px);
+  }
+}
+
+.animate-scroll-indicator {
+  animation: scroll-indicator 2s ease-in-out infinite;
+}
+
+.project-item,
+.hero-image-mask,
+.floating-shape,
+.title-line {
+  will-change: transform, opacity;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animation-complete {
+    will-change: auto;
+  }
+}
+
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -163,5 +197,6 @@ html {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    will-change: auto !important;
   }
 }

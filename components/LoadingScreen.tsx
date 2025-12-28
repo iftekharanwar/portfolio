@@ -61,7 +61,7 @@ export default function LoadingScreen() {
             setIsLoading(false);
           },
         });
-      }, 1200);
+      }, 400);
 
       return () => {
         clearTimeout(timer);

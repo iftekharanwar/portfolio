@@ -60,29 +60,29 @@ export const projects: ProjectData[] = [
   {
     id: 1,
     slug: 'hackcultura3d-heritage-generator',
-    title: 'Hack the Data Culture',
+    title: '3D Heritage Generator',
     category: 'CULTURAL TECH',
     year: '2025',
-    description: 'Award-winning app and website transforming 2D archival images into interactive 3D cultural heritage models',
-    image: '/images/projects/project-01-main.png',
+    description: 'Award-winning app and website that transforms 2D archival images into interactive 3D cultural heritage models',
+    image: '/images/projects/project-01-main.webp',
   
     context: 'Italian Ministry of Culture',
     role: 'Product Developer',
     duration: '3 days',
     tags: ['DPaaS', '3D Reconstruction', 'iOS App', 'AR', 'Metal', 'Three.js'],
   
-    heroTagline: 'FROM 2D ARCHIVES TO IMMERSIVE 3D CULTURAL EXPERIENCES ACROSS THE APPLE ECOSYSTEM',
-  
-    challenge: 'The Ministry provided large 2D image datasets of cultural heritage objects. The task was to convert these into accurate, interactive 3D models and make them accessible across iPhone, iPad, Mac, Vision Pro, and a web platform, all in just a few days.',
-  
-    solution: 'We developed a custom algorithm to generate 3D models from 2D images and built a full iOS app ecosystem along with a website showpiece. The app includes AR features allowing users to place and interact with models anywhere, providing an educational and engaging experience. The website serves as an educational showcase for schools and museums.',
+    heroTagline: 'Turning 2D archives into immersive 3D cultural experiences across the Apple ecosystem',
+
+    challenge: 'The Ministry provided large 2D image datasets of cultural heritage objects. Our task was to convert these into accurate, interactive 3D models and make them accessible across iPhone, iPad, Mac, Vision Pro, and web, all within just a few days.',
+
+    solution: 'We built a custom algorithm that generates 3D models from 2D images and developed a full iOS app ecosystem with a website showpiece. The app includes AR features that let users place and interact with models anywhere, creating an educational and engaging experience. The website works as an educational showcase for schools and museums.',
   
     gallery: [
-      { url: '/images/projects/project-01-gallery-1.png', caption: '3D Model Generated from 2D Dataset' },
-      { url: '/images/projects/project-01-gallery-2.png', caption: 'VisionOS Interface' },
-      { url: '/images/projects/project-01-gallery-3.png', caption: 'AR Interaction on iPad' },
+      { url: '/images/projects/project-01-gallery-1.webp', caption: '3D Model Generated from 2D Dataset' },
+      { url: '/images/projects/project-01-gallery-2.webp', caption: 'VisionOS Interface' },
+      { url: '/images/projects/project-01-gallery-3.webp', caption: 'AR Interaction on iPad' },
       { url: '/images/projects/pp.png', caption: 'Educational Website Showpiece' },
-      { url: '/images/projects/project-01-gallery-5.png', caption: 'The Algorithm' },
+      { url: '/images/projects/project-01-gallery-5.webp', caption: 'The Algorithm' },
     ],
   
     metrics: [
@@ -102,7 +102,7 @@ export const projects: ProjectData[] = [
     ],
   
     feedback: {
-      quote: 'This project set a new benchmark for digital heritage engagement. The team transformed 2D archives into interactive 3D experiences across the Apple ecosystem — truly impressive for a hackathon timeline.',
+      quote: 'This project set a new benchmark for digital heritage engagement. The team transformed 2D archives into interactive 3D experiences across the Apple ecosystem, which is truly impressive for a hackathon timeline.',
       author: 'HackCultura Committee',
       role: 'Event Judges, Italian Ministry of Culture',
     },
@@ -117,29 +117,29 @@ export const projects: ProjectData[] = [
   {
     id: 2,
     slug: 'inclusive-tourism-trieste',
-    title: 'Inclusive Tourism App',
+    title: 'Inclusive Tourism',
     category: 'SOCIAL IMPACT',
     year: '2025',
     description: 'First-prize winning iOS app designed with users to make tourism accessible for everyone',
-    image: '/images/projects/project-02-main.png',
+    image: '/images/projects/project-02-main.webp',
   
     context: 'Trieste Hackathon – Inclusive Tourism Challenge',
     role: 'Lead UX Designer & Developer',
     duration: '2 days',
     tags: ['iOS', 'Accessibility', 'Inclusive Design', 'User Research', 'SwiftUI'],
   
-    heroTagline: 'MAKING TOURISM ACCESSIBLE FOR ALL THROUGH USER-CENTERED DESIGN',
-  
-    challenge: 'Tourism can be difficult to navigate for people with disabilities due to physical barriers, lack of information, and limited digital tools. The challenge was to create a solution that empowers all travelers to explore Trieste comfortably and safely.',
-  
-    solution: 'We developed a user-centered iOS app that provides accessible travel routes, venue information, and real-time assistance features. We conducted interviews and workshops with people with disabilities to co-design the experience, ensuring that every feature directly met real user needs.',
+    heroTagline: 'Making tourism accessible for all through user-centered design',
+
+    challenge: 'Tourism can be difficult to navigate for people with disabilities due to physical barriers, lack of information, and limited digital tools. Our challenge was to create a solution that empowers all travelers to explore Trieste comfortably and safely.',
+
+    solution: 'We built a user-centered iOS app that provides accessible travel routes, venue information, and real-time assistance features. Through interviews and workshops with people with disabilities, we co-designed the experience to make sure every feature met real user needs.',
   
     gallery: [
-      { url: '/images/projects/project-02-gallery-1.jpg', caption: 'iOS App Interface – Accessible Routes' },
-      { url: '/images/projects/project-02-gallery-2.jpg', caption: 'User Research & Co-Design Session' },
-      { url: '/images/projects/project-02-gallery-3.jpg', caption: 'AR Navigation for Accessible Paths' },
-      { url: '/images/projects/project-02-gallery-3.jpg', caption: 'Feature Testing With Users' },
-      { url: '/images/projects/project-02-gallery-2.jpg', caption: 'Final Presentation – Hackathon' },
+      { url: '/images/projects/IMG_1694.jpg', caption: 'Getting to know the Problems' },
+      { url: '/images/projects/DSC_0060.jpg', caption: 'Our Vision' },
+      { url: '/images/projects/DSC_0012.jpg', caption: 'User Research & Co-Design Session' },
+      { url: '/images/projects/DSC_0243.jpg', caption: 'Feature Testing' },
+      { url: '/images/projects/DSC_0069.jpg', caption: 'App Interface' },
     ],
   
     metrics: [
@@ -173,29 +173,28 @@ export const projects: ProjectData[] = [
   {
     id: 3,
     slug: 'presenterpro-ai-pitch-assistant',
-    title: 'PresenterPro – AI Pitch Assistant',
+    title: 'AI Pitch Assistant',
     category: 'PRODUCTIVITY / AI',
     year: '2025',
     description: 'AI-powered app that ensures presenters never miss critical points during high-stakes presentations',
-    image: '/images/projects/project-03-main.jpg',
+    image: '/images/projects/design.png',
   
     context: 'Apple Developers Academy',
     role: 'Co-creator & iOS Developer',
     duration: '6 weeks',
     tags: ['iOS', 'AI', 'SwiftUI', 'AirPods', 'UX', 'Product Design'],
   
-    heroTagline: 'NEVER MISS A CRITICAL POINT – AI-DRIVEN PRESENTATION ASSISTANCE',
-  
-    challenge: 'Presenters like John often have multiple pitch versions for different audiences. Even after extensive preparation, adrenaline and flow can cause them to skip crucial points, leaving value on the table. Existing solutions like notes, teleprompters, or memorization are either unprofessional or rigid.',
-  
-    solution: 'PresenterPro acts as a **silent AI partner**. Users record or input their pitch, and AI identifies **key points** with timestamps. During practice and live presentations, the app whispers only the crucial points via AirPods at the perfect moment, helping presenters maintain flow, eye contact, and audience engagement without missing critical information.',
+    heroTagline: 'Never miss a critical point with AI-driven presentation assistance',
+
+    challenge: 'Presenters often have multiple pitch versions for different audiences. Even after extensive preparation, adrenaline and flow can cause them to skip crucial points, leaving value on the table. Existing solutions like notes, teleprompters, or memorization are either unprofessional or rigid.',
+
+    solution: 'PresenterPro acts as a silent AI partner. Users record or input their pitch, and AI identifies key points with timestamps. During practice and live presentations, the app whispers only the crucial points via AirPods at the perfect moment, helping presenters maintain flow, eye contact, and audience engagement without missing critical information.',
   
     gallery: [
-      { url: '/images/projects/project-03-gallery-1.jpg', caption: 'PresenterPro iOS App Interface' },
-      { url: '/images/projects/project-02-gallery-3.jpg', caption: 'Pitch Notes and AI Highlighting' },
-      { url: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&h=1080&fit=crop', caption: 'AirPods Integration for Real-Time Assistance' },
-      { url: '/images/projects/project-03-gallery-2.jpg', caption: 'Practicing with PresenterPro' },
-      { url: '/images/projects/project-01-gallery-5.jpg', caption: 'Presentation Stage Simulation' },
+      { url: '/images/projects/miro.png', caption: 'Brainstorming' },
+      { url: '/images/projects/paper.jpeg', caption: 'Designing on Paper' },
+      { url: '/images/projects/board.jpeg', caption: 'On Board for Desing Vaidation' },
+      { url: '/images/projects/design.png', caption: 'PresenterPro iOS App Design' },
     ],
   
     metrics: [
@@ -229,29 +228,28 @@ export const projects: ProjectData[] = [
   {
     id: 4,
     slug: 'pest-prediction-platform',
-    title: 'Pest Prediction Platform',
+    title: 'Pest Prediction',
     category: 'AGRICULTURE TECH',
     year: '2024',
     description: 'Machine learning platform predicting pest outbreaks to help farmers take timely action',
-    image: '/images/projects/project-04-main.jpg',
+    image: '/images/projects/main.png',
   
     context: 'i3p / NASA Space Apps Challenge – Turin',
     role: 'Lead Developer & Data Scientist',
     duration: '6 weeks',
     tags: ['Machine Learning', 'Python', 'Data Science', 'Predictive Analytics', 'Agriculture Tech'],
   
-    heroTagline: 'TURNING DATA INTO ACTIONABLE INSIGHTS FOR FARMERS',
-  
-    challenge: 'Farmers often struggle to predict pest outbreaks, leading to crop damage and financial loss. The NASA Space Apps Challenge tasked us with building a solution that could provide actionable, data-driven predictions locally in Turin, with the potential for broader adoption.',
-  
-    solution: 'We developed a **machine learning platform** that analyzes historical crop and pest data to predict outbreaks before they happen. The platform includes a **dashboard for farmers**, visualizing risk levels, recommended actions, and real-time alerts. Our solution was designed to be **scalable, reliable, and easy to use** in real-world agricultural settings.',
+    heroTagline: 'Turning data into actionable insights for farmers',
+
+    challenge: 'Farmers often struggle to predict pest outbreaks, leading to crop damage and financial loss. The NASA Space Apps Challenge asked us to build a solution that could provide actionable, data-driven predictions locally in Turin, with the potential for broader adoption.',
+
+    solution: 'We built a machine learning platform that analyzes historical crop and pest data to predict outbreaks before they happen. The platform includes a dashboard for farmers, visualizing risk levels, recommended actions, and real-time alerts. Our solution was designed to be scalable, reliable, and easy to use in real-world agricultural settings.',
   
     gallery: [
-      { url: '/images/projects/project-04-gallery-1.jpg', caption: 'Predictive Dashboard for Farmers' },
-      { url: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=1920&h=1080&fit=crop', caption: 'Data Pipeline and ML Model Training' },
-      { url: 'https://images.unsplash.com/photo-1581091012184-1c5e927ff9b2?w=1920&h=1080&fit=crop', caption: 'Local Testing with Farms in Turin' },
-      { url: 'https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=1920&h=1080&fit=crop', caption: 'Team Presentation at NASA Space Apps Challenge' },
-      { url: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&h=1080&fit=crop', caption: 'Incubation Opportunity at i3p' },
+      { url: '/images/projects/one.png', caption: 'Predictive Dashboard for Farmers' },
+      { url: '/images/projects/four.png', caption: 'Incubation Opportunity at i3p' },
+      { url: '/images/projects/three.png', caption: 'Team Presentation at NASA Space Apps Challenge' },
+      { url: '/images/projects/two.png', caption: 'Local Testing with Farms in Turin' },
     ],
   
     metrics: [
@@ -287,18 +285,8 @@ export function getProjectBySlug(slug: string): ProjectData | undefined {
   return projects.find(p => p.slug === slug);
 }
 
-export function getProjectById(id: number): ProjectData | undefined {
-  return projects.find(p => p.id === id);
-}
-
 export function getNextProject(currentId: number): ProjectData | undefined {
   const currentIndex = projects.findIndex(p => p.id === currentId);
   const nextIndex = (currentIndex + 1) % projects.length;
   return projects[nextIndex];
-}
-
-export function getPreviousProject(currentId: number): ProjectData | undefined {
-  const currentIndex = projects.findIndex(p => p.id === currentId);
-  const prevIndex = currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
-  return projects[prevIndex];
 }

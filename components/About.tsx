@@ -131,7 +131,7 @@ export default function About() {
               <div className="relative h-[700px]">
                 <div className="absolute inset-0 overflow-hidden">
                   <Image
-                    src="/images/about/profile-portrait.png"
+                    src="/images/about/profile-portrait.webp"
                     alt="Iftekhar Anwar - Creative Designer & Developer"
                     fill
                     className="object-cover"
@@ -157,7 +157,7 @@ export default function About() {
               <div className="absolute -bottom-12 left-12 w-64 h-64 hidden lg:block">
                 <div className="relative w-full h-full overflow-hidden border-8 border-gold-dark">
                   <Image
-                    src="/images/about/workspace.png"
+                    src="/images/about/workspace.webp"
                     alt="Iftekhar's workspace"
                     fill
                     className="object-cover"
@@ -194,10 +194,10 @@ export default function About() {
               {/* Description */}
               <div className="about-text-line space-y-6 text-cream/80 text-lg leading-relaxed">
                 <p>
-                  I'm a <span className="text-gold-light font-bold">multi-disciplinary designer & developer</span> obsessed with creating digital experiences that merge cutting-edge technology with stunning visual design.
+                  I'm a <span className="text-gold-light font-bold">designer and developer</span> who loves creating digital experiences that bring together great technology and beautiful visual design.
                 </p>
                 <p>
-                  With expertise spanning <span className="text-cream">UI/UX design, front-end development,</span> and <span className="text-cream">motion graphics,</span> I transform ambitious ideas into reality through meticulous attention to detail and innovative problem-solving.
+                  My work covers <span className="text-cream">UI/UX design, front-end development,</span> and <span className="text-cream">motion graphics.</span> I turn ideas into reality by paying close attention to the details and solving problems in creative ways.
                 </p>
               </div>
 
@@ -244,7 +244,7 @@ export default function About() {
               {/* CTA */}
               <div className="about-text-line pb-8 md:pb-0 text-center md:text-left">
                 <a
-                  href="/cv.pdf"
+                  href="/anwarcv.pdf"
                   download
                   className="group inline-block px-10 py-5 bg-gold text-gold-dark font-bold text-sm tracking-wider hover:bg-gold-light transition-all duration-300 relative overflow-hidden"
                 >

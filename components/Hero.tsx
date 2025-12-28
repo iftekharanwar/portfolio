@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -229,7 +230,7 @@ export default function Hero() {
             {/* Subtext */}
             <div ref={subTextRef}>
               <p className="text-xl md:text-2xl text-cream/80 max-w-md leading-relaxed" style={{ fontFamily: 'var(--font-serif)' }}>
-                Pushing boundaries between art & technology, crafting experiences that captivate & inspire.
+                Blending art with technology to create experiences that captivate and inspire.
               </p>
 
               <div className="flex gap-6 mt-8">
@@ -258,13 +259,22 @@ export default function Hero() {
           <div className="relative h-[600px] hidden lg:block">
             <div
               ref={imageMaskRef}
-              className="absolute inset-0 bg-cover bg-center"
+              className="absolute inset-0"
               style={{
-                backgroundImage: 'url(/images/hero/profile-main.png)',
                 clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
                 maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
               }}
-            />
+            >
+              <Image
+                src="/images/hero/profile-portrait.webp"
+                alt="Iftekhar Anwar - Creative Designer & Developer"
+                fill
+                priority
+                quality={90}
+                sizes="50vw"
+                className="object-cover"
+              />
+            </div>
 
             {/* Overlays and effects */}
             <div className="absolute inset-0 bg-gradient-to-t from-gold-dark via-transparent to-transparent" />

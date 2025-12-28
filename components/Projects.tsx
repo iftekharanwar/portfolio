@@ -93,7 +93,7 @@ export default function Projects() {
             </div>
             <div className="text-right">
               <p className="text-gold-dark/60 max-w-md text-lg">
-                A curated collection of projects that push creative boundaries and challenge conventions.
+                A collection of projects that push creative boundaries and challenge conventions.
               </p>
             </div>
           </div>

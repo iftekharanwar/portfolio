@@ -1,11 +1,10 @@
 'use client';
 
-import { use, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { motion } from 'framer-motion';
 import { getNextProject } from '@/data/projects';
 import type { ProjectData } from '@/data/projects';
 
@@ -177,14 +176,9 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
 
         {/* Hero content */}
         <div className="relative z-10 h-full flex flex-col justify-end px-8 md:px-16 pb-32">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-gold-light text-xs md:text-sm tracking-[0.5em] uppercase mb-6"
-          >
+          <div className="text-gold-light text-xs md:text-sm tracking-[0.5em] uppercase mb-6">
             {project.category} · {project.year}
-          </motion.div>
+          </div>
 
           <h1
             ref={titleRef}
@@ -194,32 +188,20 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
             {splitTitle}
           </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
+          <p
             className="text-cream/90 text-xl md:text-3xl max-w-4xl leading-relaxed"
             style={{ fontFamily: 'var(--font-serif)' }}
           >
             {project.heroTagline}
-          </motion.p>
+          </p>
         </div>
 
         {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex justify-center"
-        >
+        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex justify-center">
           <div className="w-px h-24 bg-cream/30 relative">
-            <motion.div
-              className="w-px h-12 bg-gold absolute top-0 left-0"
-              animate={{ y: [0, 48, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            />
+            <div className="w-px h-12 bg-gold absolute top-0 left-0 animate-scroll-indicator" />
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* PROJECT INFO BAR (hidden on mobile, sticky on desktop) */}
@@ -513,34 +495,19 @@ export default function ProjectDetailClient({ project }: { project: ProjectData 
           </div>
 
           <div className="relative z-10 h-full flex flex-col justify-center items-center px-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-gold-light text-sm tracking-[0.5em] uppercase mb-6"
-            >
+            <div className="text-gold-light text-sm tracking-[0.5em] uppercase mb-6">
               NEXT PROJECT
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+            </div>
+            <h2
               className="text-[clamp(4rem,15vw,16rem)] font-bold leading-none tracking-tighter text-cream mb-8 group-hover:tracking-wide transition-all duration-700"
               style={{ fontFamily: 'var(--font-cursive)' }}
             >
               {nextProject.title}
-            </motion.h2>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="flex items-center gap-4 text-cream text-xl font-bold tracking-wider group-hover:gap-8 transition-all duration-500"
-            >
+            </h2>
+            <div className="flex items-center gap-4 text-cream text-xl font-bold tracking-wider group-hover:gap-8 transition-all duration-500">
               <span>VIEW PROJECT</span>
               <span className="text-4xl">→</span>
-            </motion.div>
+            </div>
           </div>
         </section>
       )}

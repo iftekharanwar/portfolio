@@ -75,7 +75,7 @@ export default function Footer() {
               </h3>
             </a>
             <p className="text-cream/60 text-lg leading-relaxed max-w-md">
-              Creative designer & developer crafting premium digital experiences that inspire and engage.
+              Designer and developer creating digital experiences that inspire and engage.
             </p>
           </div>
 
@@ -85,13 +85,17 @@ export default function Footer() {
             <div>
               <h4 className="text-gold-light text-sm tracking-wider uppercase mb-6">NAVIGATION</h4>
               <ul className="space-y-3">
-                {['Work', 'About', 'Contact'].map((item, index) => (
+                {[
+                  { label: 'Work', href: '#projects' },
+                  { label: 'About', href: '#about' },
+                  { label: 'Contact', href: '#contact' },
+                ].map((item, index) => (
                   <li key={index}>
                     <a
-                      href={`#${item.toLowerCase()}`}
+                      href={item.href}
                       className="text-cream/70 hover:text-gold-light transition-colors duration-300 text-lg"
                     >
-                      {item}
+                      {item.label}
                     </a>
                   </li>
                 ))}

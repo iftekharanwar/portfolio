@@ -15,10 +15,10 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   useEffect(() => {
     // Initialize Lenis
     const lenis = new Lenis({
-      duration: 0.8,
+      duration: 0.6,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1.0,
+      wheelMultiplier: 1.2,
       touchMultiplier: 2,
       infinite: false,
     });
@@ -35,7 +35,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     gsap.ticker.lagSmoothing(0);
 
     ScrollTrigger.config({
-      syncInterval: 150,
+      syncInterval: 16,
       autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
     });
 

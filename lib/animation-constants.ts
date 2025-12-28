@@ -45,38 +45,3 @@ export const ROTATION = {
   half: 180,
   full: 360,
 } as const;
-
-/**
-  Common animation
- */
-export const ANIMATION_PRESETS = {
-
-  fadeInUp: {
-    y: ANIMATION_DISTANCE.medium,
-    opacity: 0,
-    duration: ANIMATION_DURATION.normal,
-    ease: ANIMATION_EASING.smooth,
-  },
-
-  fadeInUpDramatic: {
-    y: ANIMATION_DISTANCE.large,
-    opacity: 0,
-    duration: ANIMATION_DURATION.slow,
-    ease: ANIMATION_EASING.dramatic,
-  },
-
-  fadeInStagger: {
-    y: ANIMATION_DISTANCE.small,
-    opacity: 0,
-    stagger: STAGGER_DELAY.normal,
-    duration: ANIMATION_DURATION.normal,
-    ease: ANIMATION_EASING.smooth,
-  },
-
-  scaleIn: {
-    scale: 0,
-    opacity: 0,
-    duration: ANIMATION_DURATION.normal,
-    ease: ANIMATION_EASING.bounce,
-  },
-} as const;
