@@ -150,6 +150,15 @@ section {
   }
 }
 
+/* Chrome viewport height fix */
+@media screen and (-webkit-min-device-pixel-ratio:0)
+  and (min-resolution:.001dpcm) {
+  section[class*="min-h-screen"] {
+    height: 100vh;
+    min-height: 100vh;
+  }
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
   body::after {
@@ -209,6 +218,26 @@ section {
   button {
     min-height: 44px;
     min-width: 44px;
+    -webkit-tap-highlight-color: rgba(235, 193, 118, 0.3);
+    tap-highlight-color: rgba(235, 193, 118, 0.3);
+  }
+
+  /* Active state for all interactive elements */
+  a:active,
+  button:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+    transition: all 0.1s ease;
+  }
+
+  /* Button active states */
+  button:active {
+    filter: brightness(0.9);
+  }
+
+  /* Link active states */
+  a:active {
+    background-color: rgba(235, 193, 118, 0.1);
   }
 
   .group:hover .group-hover\:translate-x-0 {
@@ -223,6 +252,10 @@ section {
 
   .overflow-x-auto {
     -webkit-overflow-scrolling: touch;
+  }
+
+  *:hover {
+    transition-duration: 0s;
   }
 }
 
@@ -266,6 +299,36 @@ section {
   color: var(--gold-dark);
 }
 
+.bg-gold:active,
+.bg-gold-light:active {
+  background-color: #d4a04f !important;
+  transform: scale(0.98);
+}
+
+.border-cream:active {
+  background-color: rgba(255, 245, 225, 0.2);
+}
+
+.text-gold-light:active {
+  color: #ffd98e;
+}
+
+nav a:active {
+  color: var(--gold-light) !important;
+  transform: translateY(1px);
+}
+
+.project-item:active {
+  transform: scale(0.99);
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--gold-light);
+  outline: 2px solid rgba(235, 193, 118, 0.3);
+  outline-offset: 2px;
+}
+
 /* Additional Animations */
 @keyframes spin-slow {
   from {
@@ -278,6 +341,42 @@ section {
 
 .animate-spin-slow {
   animation: spin-slow 20s linear infinite;
+}
+
+/* Ripple effect animation */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(235, 193, 118, 0.4);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.ripple:active::after {
+  width: 100%;
+  height: 100%;
+  animation: ripple 0.6s ease-out;
 }
 
 .scrollbar-hide {

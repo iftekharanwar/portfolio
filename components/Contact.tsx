@@ -383,7 +383,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="group relative w-full py-6 bg-gold hover:bg-gold-light text-gold-dark font-bold text-lg tracking-wider overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              className="ripple group relative w-full py-6 bg-gold hover:bg-gold-light text-gold-dark font-bold text-lg tracking-wider overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
               <span className="relative z-10">
                 {isSubmitting ? (

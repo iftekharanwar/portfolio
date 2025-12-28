@@ -118,8 +118,10 @@ export default function Hero() {
         });
       }
 
-      // Parallax scroll
-      if (heroRef.current) {
+      // Parallax scroll (disabled for Chrome due to viewport issues)
+      const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+
+      if (heroRef.current && !isChrome) {
         gsap.set(heroRef.current, {
           scale: 1,
           opacity: 1,
@@ -140,6 +142,11 @@ export default function Hero() {
           },
           scale: 0.9,
           opacity: 0.3,
+        });
+      } else if (heroRef.current && isChrome) {
+        gsap.set(heroRef.current, {
+          scale: 1,
+          opacity: 1,
         });
       }
 
@@ -168,7 +175,8 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gold-dark"
+      className="relative min-h-screen h-screen flex items-center justify-center overflow-hidden bg-gold-dark"
+      style={{ minHeight: '100vh', height: '100vh' }}
     >
       {/* Floating decorative elements */}
       <div ref={floatingElementsRef} className="absolute inset-0 pointer-events-none">
@@ -179,7 +187,7 @@ export default function Hero() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-[90%] mx-auto">
+      <div className="relative z-10 w-full max-w-[90%] mx-auto py-8 md:py-0">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 
           {/* Left Side - Typography */}
@@ -238,7 +246,7 @@ export default function Hero() {
                   onClick={() => {
                     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="group px-8 py-4 bg-gold text-gold-dark font-bold tracking-wider hover:bg-gold-light transition-all duration-300 relative overflow-hidden"
+                  className="ripple group px-8 py-4 bg-gold text-gold-dark font-bold tracking-wider hover:bg-gold-light transition-all duration-300 relative overflow-hidden active:scale-95"
                 >
                   <span className="relative z-10">VIEW WORK</span>
                   <div className="absolute inset-0 bg-cream transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
@@ -247,7 +255,7 @@ export default function Hero() {
                   onClick={() => {
                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="px-8 py-4 border-2 border-cream text-cream font-bold tracking-wider hover:bg-cream hover:text-gold-dark transition-all duration-300"
+                  className="ripple px-8 py-4 border-2 border-cream text-cream font-bold tracking-wider hover:bg-cream hover:text-gold-dark transition-all duration-300 active:scale-95"
                 >
                   CONTACT
                 </button>
@@ -287,7 +295,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-bounce">
+      <div className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-bounce pb-4">
         <div className="w-6 h-10 border-2 border-cream/50 rounded-full flex justify-center pt-2">
           <div className="w-1 h-2 bg-cream/50 rounded-full" />
         </div>
