@@ -24,86 +24,101 @@ export default function About() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       try {
+        gsap.set(['.about-text-line', '.stat-number'], {
+          opacity: 1,
+          y: 0,
+        });
+        if (imageContainerRef.current) {
+          gsap.set(imageContainerRef.current, { opacity: 1, y: 0 });
+        }
+
         if (prefersReducedMotion) {
-          gsap.set(['.about-text-line', '.stat-number'], {
-            opacity: 1,
-            y: 0,
-          });
-          if (imageContainerRef.current) {
-            gsap.set(imageContainerRef.current, { opacity: 1, y: 0 });
-          }
           return;
         }
-        // Only pin on desktop (lg breakpoint)
+
+        const stats = document.querySelectorAll('.stat-number');
+        if (stats && stats.length > 0) {
+          stats.forEach((stat) => {
+            const target = parseInt(stat.getAttribute('data-target') || '0');
+            const hasPlus = stat.textContent?.includes('+');
+
+            const counter = { value: 0 };
+
+            gsap.to(counter, {
+              value: target,
+              scrollTrigger: {
+                trigger: stat,
+                start: 'top 80%',
+                once: true,
+              },
+              duration: ANIMATION_DURATION.verySlow,
+              ease: 'power1.out',
+              onUpdate: function () {
+                const currentValue = Math.ceil(counter.value);
+                stat.textContent = hasPlus ? currentValue.toString() + '+' : currentValue.toString();
+              },
+            });
+          });
+        }
+
+        // Only apply pin and animations on desktop
         const mm = gsap.matchMedia();
 
-      mm.add("(min-width: 1024px)", () => {
-        ScrollTrigger.create({
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom bottom',
-          pin: '.about-content',
-          pinSpacing: false,
+        mm.add("(min-width: 1024px)", () => {
+          if (sectionRef.current) {
+            ScrollTrigger.create({
+              trigger: sectionRef.current,
+              start: 'top top',
+              end: 'bottom bottom',
+              pin: '.about-content',
+              pinSpacing: false,
+            });
+          }
+
+          // Image animation only on desktop
+          if (imageContainerRef.current) {
+            gsap.fromTo(imageContainerRef.current,
+              {
+                y: ANIMATION_DISTANCE.medium,
+                opacity: 0,
+              },
+              {
+                scrollTrigger: {
+                  trigger: imageContainerRef.current,
+                  start: SCROLL_TRIGGER_START.normal,
+                  once: true,
+                },
+                y: 0,
+                opacity: 1,
+                duration: ANIMATION_DURATION.normal,
+                ease: ANIMATION_EASING.energetic,
+              }
+            );
+          }
+
+          // Text animations only on desktop
+          const textLines = document.querySelectorAll('.about-text-line');
+          if (textLines && textLines.length > 0) {
+            gsap.fromTo(textLines,
+              {
+                y: ANIMATION_DISTANCE.small,
+                opacity: 0,
+              },
+              {
+                scrollTrigger: {
+                  trigger: textRef.current,
+                  start: SCROLL_TRIGGER_START.normal,
+                  once: true,
+                },
+                y: 0,
+                opacity: 1,
+                stagger: STAGGER_DELAY.normal,
+                duration: ANIMATION_DURATION.normal,
+                ease: ANIMATION_EASING.smooth,
+              }
+            );
+          }
         });
-      });
-
-      // Simplified animations for better mobile performance
-      if (imageContainerRef.current) {
-        gsap.from(imageContainerRef.current, {
-          scrollTrigger: {
-            trigger: imageContainerRef.current,
-            start: SCROLL_TRIGGER_START.normal,
-            once: true,
-          },
-          y: ANIMATION_DISTANCE.medium,
-          opacity: 0,
-          duration: ANIMATION_DURATION.normal,
-          ease: ANIMATION_EASING.energetic,
-        });
-      }
-
-      // Text animations
-      const textLines = document.querySelectorAll('.about-text-line');
-      if (textLines && textLines.length > 0) {
-        gsap.from(textLines, {
-          scrollTrigger: {
-            trigger: textRef.current,
-            start: SCROLL_TRIGGER_START.normal,
-            once: true,
-          },
-          y: ANIMATION_DISTANCE.small,
-          opacity: 0,
-          stagger: STAGGER_DELAY.normal,
-          duration: ANIMATION_DURATION.normal,
-          ease: ANIMATION_EASING.smooth,
-        });
-      }
-
-      // Stats counter animation
-      const stats = document.querySelectorAll('.stat-number');
-      if (stats && stats.length > 0) {
-        stats.forEach((stat) => {
-          const target = parseInt(stat.getAttribute('data-target') || '0');
-          const hasPlus = stat.textContent?.includes('+');
-
-          const counter = { value: 0 };
-
-          gsap.to(counter, {
-            value: target,
-            scrollTrigger: {
-              trigger: stat,
-              start: SCROLL_TRIGGER_START.early,
-              once: true,
-            },
-            duration: ANIMATION_DURATION.verySlow,
-            ease: 'power1.out',
-            onUpdate: function () {
-              const currentValue = Math.ceil(counter.value);
-              stat.textContent = hasPlus ? currentValue.toString() + '+' : currentValue.toString();
-            },
-          });
-        });
-      }
       } catch (error) {
         console.error('About animation error:', error);
         gsap.set(['.about-text-line', '.stat-number'], {
@@ -120,15 +135,15 @@ export default function About() {
   }, [prefersReducedMotion]);
 
   return (
-    <section ref={sectionRef} id="about" className="relative min-h-screen bg-gold-dark overflow-hidden">
-      <div className="about-content relative min-h-screen flex items-center">
-        <div className="w-full max-w-[95%] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section ref={sectionRef} id="about" className="relative bg-gold-dark lg:overflow-hidden">
+      <div className="about-content relative w-full px-6 py-16 lg:px-0 lg:max-w-[95%] lg:mx-auto lg:min-h-screen lg:flex lg:items-center lg:py-16">
+        <div className="w-full">
+          <div className="flex flex-col space-y-12 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
 
             {/* Left Side - Images */}
-            <div ref={imageContainerRef} className="relative">
+            <div ref={imageContainerRef} className="relative w-full">
               {/* Main Image */}
-              <div className="relative h-[700px]">
+              <div className="relative h-[500px] md:h-[600px] lg:h-[700px]">
                 <div className="absolute inset-0 overflow-hidden">
                   <Image
                     src="/images/about/profile-portrait.webp"
@@ -168,7 +183,7 @@ export default function About() {
             </div>
 
             {/* Right Side - Content */}
-            <div ref={textRef} className="space-y-12">
+            <div ref={textRef} className="relative z-10 w-full space-y-8 lg:space-y-12">
               {/* Section label */}
               <div className="about-text-line flex items-center gap-4">
                 <div className="w-16 h-px bg-gold-light" />
@@ -180,7 +195,7 @@ export default function About() {
               {/* Main heading */}
               <div className="about-text-line">
                 <h2
-                  className="text-[clamp(3rem,8vw,6rem)] font-bold leading-none tracking-tighter text-cream mb-6"
+                  className="text-[clamp(2.5rem,8vw,6rem)] font-bold leading-tight tracking-tighter text-cream"
                   style={{ fontFamily: 'var(--font-cursive)' }}
                 >
                   CRAFTING
@@ -197,7 +212,7 @@ export default function About() {
                   I'm a <span className="text-gold-light font-bold">designer and developer</span> who loves creating digital experiences that bring together great technology and beautiful visual design.
                 </p>
                 <p>
-                  My work covers <span className="text-cream">UI/UX design, front-end development,</span> and <span className="text-cream">motion graphics.</span> I turn ideas into reality by paying close attention to the details and solving problems in creative ways.
+                  My work covers <span className="text-cream">machine learning, full-stack development,</span> and <span className="text-cream">cloud architecture.</span> Apple Developers Academy alumnus. I turn ideas into reality by paying close attention to the details and solving problems in creative ways.
                 </p>
               </div>
 
@@ -230,8 +245,8 @@ export default function About() {
               </div>
 
               {/* Skills tags */}
-              <div className="about-text-line flex flex-wrap gap-3">
-                {['REACT', 'NEXT.JS', 'GSAP', 'FIGMA', 'THREE.JS', 'WEBGL'].map((skill, index) => (
+              <div className="about-text-line flex flex-wrap gap-3 justify-center md:justify-start">
+                {['PYTHON', 'NEXT.JS', 'SWIFTUI', 'TENSORFLOW', 'AWS', 'GCP', 'DOCKER', 'FIGMA'].map((skill, index) => (
                   <div
                     key={index}
                     className="px-4 py-2 border border-gold-light/30 text-cream text-xs tracking-wider hover:bg-gold-light/10 transition-colors duration-300"
@@ -258,7 +273,7 @@ export default function About() {
       </div>
 
       {/* Background decorative text */}
-      <div className="absolute bottom-20 left-0 text-[15vw] font-bold text-cream/5 pointer-events-none whitespace-nowrap"
+      <div className="hidden lg:block absolute bottom-20 left-0 text-[15vw] font-bold text-cream/5 pointer-events-none whitespace-nowrap"
            style={{ fontFamily: 'var(--font-cursive)' }}>
         CREATIVE DEVELOPER
       </div>
