@@ -44,7 +44,10 @@ body::before {
   opacity: 0.03;
   z-index: 9999;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  will-change: auto;
+  transform: translateZ(0);
 }
 
 body {
@@ -59,24 +62,28 @@ body {
 body::after {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
+  top: -50%;
+  left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at 20% 50%, rgba(235, 193, 118, 0.3) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(196, 139, 40, 0.4) 0%, transparent 50%),
-              radial-gradient(circle at 40% 20%, rgba(255, 245, 225, 0.2) 0%, transparent 50%);
-  animation: gradientShift 20s ease infinite;
+  background: radial-gradient(circle at 20% 50%, rgba(235, 193, 118, 0.2) 0%, transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(196, 139, 40, 0.25) 0%, transparent 40%),
+              radial-gradient(circle at 40% 20%, rgba(255, 245, 225, 0.15) 0%, transparent 40%);
+  animation: gradientShift 25s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
   will-change: transform;
-  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 @keyframes gradientShift {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(-10%, -10%) rotate(120deg); }
-  66% { transform: translate(-20%, 10%) rotate(240deg); }
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-5%, -5%, 0) rotate(180deg);
+  }
 }
 
 main {
@@ -87,6 +94,152 @@ main {
 /* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+/* Cross-Browser Compatibility */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@supports not (backdrop-filter: blur(10px)) {
+  .backdrop-blur-sm,
+  .backdrop-blur-md {
+    background-color: rgba(90, 60, 11, 0.9) !important;
+  }
+}
+
+@-moz-document url-prefix() {
+  body {
+    font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+section,
+.project-item,
+.hero-image-mask,
+.floating-shape {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+img {
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+}
+
+section {
+  contain: layout style;
+}
+
+@supports (-webkit-appearance: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+
+  section,
+  .project-item {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0) scale(1.0, 1.0);
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  body::after {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  body::before {
+    opacity: 0.02;
+  }
+
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+  }
+
+  .backdrop-blur-md {
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  body::after {
+    animation-duration: 30s !important;
+  }
+}
+
+/* Old Android/iOS browser support */
+@supports not (display: grid) {
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .grid-cols-2 > * {
+    flex: 0 0 50%;
+  }
+
+  .grid-cols-3 > * {
+    flex: 0 0 33.333%;
+  }
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  a,
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .group:hover .group-hover\:translate-x-0 {
+    transform: none;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@supports (-ms-ime-align: auto) {
+  .flex {
+    display: -ms-flexbox;
+  }
+
+  .grid {
+    display: -ms-grid;
+  }
+}
+
+@supports (-webkit-text-size-adjust: none) and (not (-ms-ime-align: auto)) {
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
 }
 
 /* Custom Scrollbar */

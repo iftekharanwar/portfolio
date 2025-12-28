@@ -92,8 +92,8 @@ export default function CustomCursor() {
         style={{
           border: '2px solid var(--gold-light)',
           borderRadius: '50%',
-          mixBlendMode: 'difference',
           willChange: 'transform',
+          transform: 'translateZ(0)',
         }}
         aria-hidden="true"
       />

@@ -13,7 +13,23 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   const pathname = usePathname();
 
   useEffect(() => {
-    // Initialize Lenis
+    const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+
+    if (isChrome) {
+      // Use native scrolling for Chrome
+      ScrollTrigger.config({
+        syncInterval: 16,
+        autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
+      });
+
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+      });
+
+      return () => {
+      };
+    }
+
     const lenis = new Lenis({
       duration: 0.6,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
