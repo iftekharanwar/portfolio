@@ -256,17 +256,6 @@ export default function About() {
                 ))}
               </div>
 
-              {/* CTA */}
-              <div className="about-text-line pb-8 md:pb-0 text-center md:text-left">
-                <a
-                  href="/anwarcv.pdf"
-                  download
-                  className="ripple group inline-block px-10 py-5 bg-gold text-gold-dark font-bold text-sm tracking-wider hover:bg-gold-light transition-all duration-300 relative overflow-hidden active:scale-95"
-                >
-                  <span className="relative z-10">DOWNLOAD CV</span>
-                  <div className="absolute inset-0 bg-cream transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                </a>
-              </div>
             </div>
           </div>
         </div>
