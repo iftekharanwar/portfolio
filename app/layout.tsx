@@ -25,9 +25,9 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://iftekharanwar.vercel.app'),
-  title: "Iftekhar Anwar | Designer & Developer",
-  description: "Student, builder, and creative technologist. I design and develop digital experiences with bold animations, thoughtful UX, and clean code. Apple Developers Academy alumnus.",
-  keywords: ["Iftekhar Anwar", "designer", "developer", "portfolio", "web design", "UI/UX", "React", "Next.js", "creative developer", "Apple Developers Academy"],
+  title: "Iftekhar Anwar | Product Manager & Developer",
+  description: "Co-founder & COO of Compex (EUR 5M valuation). Final-year Computer Engineering student at Politecnico di Torino. Managed end-to-end delivery of 15+ client projects across 5+ industries. 8x hackathon winner.",
+  keywords: ["Iftekhar Anwar", "product manager", "project manager", "developer", "portfolio", "startup founder", "Compex", "Politecnico di Torino", "Apple Developers Academy", "product delivery"],
   authors: [{ name: "Iftekhar Anwar" }],
   creator: "Iftekhar Anwar",
   applicationName: "Iftekhar Anwar",
@@ -41,8 +41,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://iftekharanwar.vercel.app",
     siteName: "Iftekhar Anwar Portfolio",
-    title: "Iftekhar Anwar | Designer & Developer",
-    description: "Student, builder, and creative technologist. I design and develop digital experiences.",
+    title: "Iftekhar Anwar | Product Manager & Developer",
+    description: "Co-founder of Compex (EUR 5M valuation). Delivered 15+ client projects. 8x hackathon winner.",
     images: [
       {
         url: "/og-image.png", // We'll create this
@@ -54,8 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Iftekhar Anwar | Designer & Developer",
-    description: "Student, builder, and creative technologist. I design and develop digital experiences.",
+    title: "Iftekhar Anwar | Product Manager & Developer",
+    description: "Co-founder of Compex (EUR 5M valuation). Delivered 15+ client projects. 8x hackathon winner.",
     images: ["/og-image.png"],
     creator: "@wespaxe",
   },

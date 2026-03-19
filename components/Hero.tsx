@@ -207,7 +207,7 @@ export default function Hero() {
                   className="text-[clamp(3rem,10vw,8rem)] font-bold leading-none tracking-tighter text-cream"
                   style={{ fontFamily: 'var(--font-cursive)' }}
                 >
-                  CREATIVE
+                  I BUILD
                 </h1>
               </div>
               <div className="title-line flex items-center gap-4 overflow-hidden">
@@ -217,7 +217,7 @@ export default function Hero() {
                   className="text-[clamp(3rem,10vw,8rem)] font-bold leading-none tracking-tighter text-cream flex-shrink-0"
                   style={{ fontFamily: 'var(--font-cursive)' }}
                 >
-                  DESIGNER
+                  PRODUCTS
                 </h1>
               </div>
               <div className="title-line flex items-end gap-4 overflow-hidden">
@@ -230,7 +230,7 @@ export default function Hero() {
                     WebkitTextFillColor: 'transparent',
                   }}
                 >
-                  DEVELOPER
+                  SHIP THEM
                 </h1>
               </div>
             </div>
@@ -238,7 +238,7 @@ export default function Hero() {
             {/* Subtext */}
             <div ref={subTextRef}>
               <p className="text-xl md:text-2xl text-cream/80 max-w-md leading-relaxed" style={{ fontFamily: 'var(--font-serif)' }}>
-                Blending art with technology to create experiences that captivate and inspire.
+                Co-founded an AI startup (EUR 5M valuation). Delivered 15+ client projects. 8x hackathon winner. I turn ideas into products and manage their delivery.
               </p>
 
               <div className="flex gap-6 mt-8">
@@ -275,7 +275,7 @@ export default function Hero() {
             >
               <Image
                 src="/images/hero/profile-portrait.webp"
-                alt="Iftekhar Anwar - Creative Designer & Developer"
+                alt="Iftekhar Anwar - Product Manager & Developer"
                 fill
                 priority
                 quality={90}

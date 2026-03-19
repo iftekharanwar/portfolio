@@ -147,7 +147,7 @@ export default function About() {
                 <div className="absolute inset-0 overflow-hidden">
                   <Image
                     src="/images/about/profile-portrait.webp"
-                    alt="Iftekhar Anwar - Creative Designer & Developer"
+                    alt="Iftekhar Anwar - Product Manager & Developer"
                     fill
                     className="object-cover"
                     sizes="50vw"
@@ -198,21 +198,21 @@ export default function About() {
                   className="text-[clamp(2.5rem,8vw,6rem)] font-bold leading-tight tracking-tighter text-cream"
                   style={{ fontFamily: 'var(--font-cursive)' }}
                 >
-                  CRAFTING
+                  FROM IDEA
                   <br />
-                  <span className="text-gold-light">DIGITAL</span>
+                  <span className="text-gold-light">TO</span>
                   <br />
-                  EXCELLENCE
+                  DELIVERY
                 </h2>
               </div>
 
               {/* Description */}
               <div className="about-text-line space-y-6 text-cream/80 text-lg leading-relaxed">
                 <p>
-                  I'm a <span className="text-gold-light font-bold">designer and developer</span> who loves creating digital experiences that bring together great technology and beautiful visual design.
+                  Final-year Computer Engineering student at <span className="text-gold-light font-bold">Politecnico di Torino</span>. Co-founded <span className="text-gold-light font-bold">Compex</span>, an AI infrastructure startup (EUR 5M valuation, EUR 150K pre-seed), where I led go-to-market strategy and enterprise sales with a 6/10 conversion rate.
                 </p>
                 <p>
-                  My work covers <span className="text-cream">machine learning, full-stack development,</span> and <span className="text-cream">cloud architecture.</span> Apple Developers Academy alumnus. I turn ideas into reality by paying close attention to the details and solving problems in creative ways.
+                  I manage <span className="text-cream">end-to-end product delivery</span> — from requirement gathering and roadmap planning to stakeholder communication and launch. Delivered <span className="text-cream">15+ client projects across 5+ industries</span> at TogetherForBrands and Studio Napoli. Apple Developers Academy alumnus. 8x hackathon winner.
                 </p>
               </div>
 
@@ -223,30 +223,30 @@ export default function About() {
                     0+
                   </div>
                   <div className="text-xs text-cream/60 uppercase tracking-wider">
-                    Projects<br />Completed
+                    Client Projects<br />Delivered
                   </div>
                 </div>
                 <div className="text-center md:text-left">
-                  <div className="stat-number text-3xl md:text-4xl font-bold text-gold-light mb-2" data-target="50">
+                  <div className="stat-number text-3xl md:text-4xl font-bold text-gold-light mb-2" data-target="5">
                     0+
                   </div>
                   <div className="text-xs text-cream/60 uppercase tracking-wider">
-                    Team<br />Collaborations
+                    Industries<br />Served
                   </div>
                 </div>
                 <div className="text-center md:text-left">
-                  <div className="stat-number text-3xl md:text-4xl font-bold text-gold-light mb-2" data-target="13">
+                  <div className="stat-number text-3xl md:text-4xl font-bold text-gold-light mb-2" data-target="8">
                     0
                   </div>
                   <div className="text-xs text-cream/60 uppercase tracking-wider">
-                    Awards<br />Won
+                    Hackathons<br />Won
                   </div>
                 </div>
               </div>
 
               {/* Skills tags */}
               <div className="about-text-line flex flex-wrap gap-3 justify-center md:justify-start">
-                {['PYTHON', 'NEXT.JS', 'SWIFTUI', 'TENSORFLOW', 'AWS', 'GCP', 'DOCKER', 'FIGMA'].map((skill, index) => (
+                {['PRODUCT STRATEGY', 'AGILE / SCRUM', 'JIRA', 'FIGMA', 'STAKEHOLDER MGMT', 'USER RESEARCH', 'PYTHON', 'NOTION'].map((skill, index) => (
                   <div
                     key={index}
                     className="px-4 py-2 border border-gold-light/30 text-cream text-xs tracking-wider hover:bg-gold-light/10 transition-colors duration-300"
@@ -275,7 +275,7 @@ export default function About() {
       {/* Background decorative text */}
       <div className="hidden lg:block absolute bottom-20 left-0 text-[15vw] font-bold text-cream/5 pointer-events-none whitespace-nowrap"
            style={{ fontFamily: 'var(--font-cursive)' }}>
-        CREATIVE DEVELOPER
+        PRODUCT LEADER
       </div>
     </section>
   );
