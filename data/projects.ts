@@ -81,7 +81,7 @@ export const projects: ProjectData[] = [
       { url: '/images/projects/project-01-gallery-1.webp', caption: '3D Model Generated from 2D Dataset' },
       { url: '/images/projects/project-01-gallery-2.webp', caption: 'VisionOS Interface' },
       { url: '/images/projects/project-01-gallery-3.webp', caption: 'AR Interaction on iPad' },
-      { url: '/images/projects/pp.png', caption: 'Educational Website Showpiece' },
+      { url: '/images/projects/pp.webp', caption: 'Educational Website Showpiece' },
       { url: '/images/projects/project-01-gallery-5.webp', caption: 'The Algorithm' },
     ],
   
@@ -135,11 +135,11 @@ export const projects: ProjectData[] = [
     solution: 'We built a user-centered iOS app that provides accessible travel routes, venue information, and real-time assistance features. Through interviews and workshops with people with disabilities, we co-designed the experience to make sure every feature met real user needs.',
   
     gallery: [
-      { url: '/images/projects/IMG_1694.jpg', caption: 'Getting to know the Problems' },
-      { url: '/images/projects/DSC_0060.jpg', caption: 'Our Vision' },
-      { url: '/images/projects/DSC_0012.jpg', caption: 'User Research & Co-Design Session' },
-      { url: '/images/projects/DSC_0243.jpg', caption: 'Feature Testing' },
-      { url: '/images/projects/DSC_0069.jpg', caption: 'App Interface' },
+      { url: '/images/projects/IMG_1694.webp', caption: 'Getting to know the Problems' },
+      { url: '/images/projects/DSC_0060.webp', caption: 'Our Vision' },
+      { url: '/images/projects/DSC_0012.webp', caption: 'User Research & Co-Design Session' },
+      { url: '/images/projects/DSC_0243.webp', caption: 'Feature Testing' },
+      { url: '/images/projects/DSC_0069.webp', caption: 'App Interface' },
     ],
   
     metrics: [
@@ -177,7 +177,7 @@ export const projects: ProjectData[] = [
     category: 'PRODUCTIVITY / AI',
     year: '2025',
     description: 'AI-powered app that ensures presenters never miss critical points during high-stakes presentations',
-    image: '/images/projects/design.png',
+    image: '/images/projects/design.webp',
   
     context: 'Apple Developers Academy',
     role: 'Co-creator & iOS Developer',
@@ -191,10 +191,10 @@ export const projects: ProjectData[] = [
     solution: 'PresenterPro acts as a silent AI partner. Users record or input their pitch, and AI identifies key points with timestamps. During practice and live presentations, the app whispers only the crucial points via AirPods at the perfect moment, helping presenters maintain flow, eye contact, and audience engagement without missing critical information.',
   
     gallery: [
-      { url: '/images/projects/miro.png', caption: 'Brainstorming' },
-      { url: '/images/projects/paper.jpeg', caption: 'Designing on Paper' },
-      { url: '/images/projects/board.jpeg', caption: 'On Board for Desing Vaidation' },
-      { url: '/images/projects/design.png', caption: 'PresenterPro iOS App Design' },
+      { url: '/images/projects/miro.webp', caption: 'Brainstorming' },
+      { url: '/images/projects/paper.webp', caption: 'Designing on Paper' },
+      { url: '/images/projects/board.webp', caption: 'On Board for Design Validation' },
+      { url: '/images/projects/design.webp', caption: 'PresenterPro iOS App Design' },
     ],
   
     metrics: [
@@ -232,7 +232,7 @@ export const projects: ProjectData[] = [
     category: 'AGRICULTURE TECH',
     year: '2024',
     description: 'Machine learning platform predicting pest outbreaks to help farmers take timely action',
-    image: '/images/projects/main.png',
+    image: '/images/projects/main.webp',
   
     context: 'i3p / NASA Space Apps Challenge – Turin',
     role: 'Lead Developer & Data Scientist',
@@ -246,10 +246,10 @@ export const projects: ProjectData[] = [
     solution: 'We built a machine learning platform that analyzes historical crop and pest data to predict outbreaks before they happen. The platform includes a dashboard for farmers, visualizing risk levels, recommended actions, and real-time alerts. Our solution was designed to be scalable, reliable, and easy to use in real-world agricultural settings.',
   
     gallery: [
-      { url: '/images/projects/one.png', caption: 'Predictive Dashboard for Farmers' },
-      { url: '/images/projects/four.png', caption: 'Incubation Opportunity at i3p' },
-      { url: '/images/projects/three.png', caption: 'Team Presentation at NASA Space Apps Challenge' },
-      { url: '/images/projects/two.png', caption: 'Local Testing with Farms in Turin' },
+      { url: '/images/projects/one.webp', caption: 'Predictive Dashboard for Farmers' },
+      { url: '/images/projects/four.webp', caption: 'Incubation Opportunity at i3p' },
+      { url: '/images/projects/three.webp', caption: 'Team Presentation at NASA Space Apps Challenge' },
+      { url: '/images/projects/two.webp', caption: 'Local Testing with Farms in Turin' },
     ],
   
     metrics: [

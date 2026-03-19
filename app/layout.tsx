@@ -24,7 +24,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://iftekharanwar.com'),
+  metadataBase: new URL('https://iftekharanwar.vercel.app'),
   title: "Iftekhar Anwar | Designer & Developer",
   description: "Student, builder, and creative technologist. I design and develop digital experiences with bold animations, thoughtful UX, and clean code. Apple Developers Academy alumnus.",
   keywords: ["Iftekhar Anwar", "designer", "developer", "portfolio", "web design", "UI/UX", "React", "Next.js", "creative developer", "Apple Developers Academy"],
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://iftekharanwar.com",
+    url: "https://iftekharanwar.vercel.app",
     siteName: "Iftekhar Anwar Portfolio",
     title: "Iftekhar Anwar | Designer & Developer",
     description: "Student, builder, and creative technologist. I design and develop digital experiences.",

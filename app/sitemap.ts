@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { projects } from '@/data/projects';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://iftekharanwar.com';
+  const baseUrl = 'https://iftekharanwar.vercel.app';
 
   // Homepage
   const routes = [
