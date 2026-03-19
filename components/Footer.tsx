@@ -75,7 +75,7 @@ export default function Footer() {
               </h3>
             </a>
             <p className="text-cream/60 text-lg leading-relaxed max-w-md">
-              Designer and developer creating digital experiences that inspire and engage.
+              Product manager and developer who builds products and ships them.
             </p>
           </div>
 
