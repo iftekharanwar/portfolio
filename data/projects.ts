@@ -86,10 +86,10 @@ export const projects: ProjectData[] = [
     ],
   
     metrics: [
-      { label: 'Hackathon Ranking', value: '1st Prize', description: 'Winner of Challenge 2' },
-      { label: '3D Models Generated', value: '7+', description: 'Artifacts reconstructed from 2D datasets' },
-      { label: 'AR Engagement', value: '4.9/5', description: 'Users interacted with models via AR in the app' },
-      { label: 'Ecosystem Coverage', value: '4 devices', description: 'iPhone, iPad, Mac, Vision Pro support' },
+      { label: 'Hackathon Ranking', value: '1st Prize', description: 'Winner of Challenge 2, HackCultura' },
+      { label: 'Timeline', value: '3 days', description: 'From 2D datasets to a working multi-device build' },
+      { label: 'Ecosystem Coverage', value: '4 devices', description: 'iPhone, iPad, Mac, and Vision Pro' },
+      { label: 'Pipeline', value: '2D → 3D', description: 'Custom reconstruction from archival images' },
     ],
   
     process: [
@@ -116,112 +116,97 @@ export const projects: ProjectData[] = [
 
   {
     id: 2,
-    slug: 'inclusive-tourism-trieste',
-    title: 'Inclusive Tourism',
-    category: 'SOCIAL IMPACT',
+    slug: 'shoebox-daily-photo-game',
+    title: 'Shoebox',
+    category: 'iOS GAME · DESIGN',
     year: '2025',
-    description: 'First-prize winning iOS app designed with users to make tourism accessible for everyone',
-    image: '/images/projects/project-02-main.webp',
-  
-    context: 'Trieste Hackathon – Inclusive Tourism Challenge',
-    role: 'Lead UX Designer & Developer',
-    duration: '2 days',
-    tags: ['iOS', 'Accessibility', 'Inclusive Design', 'User Research', 'SwiftUI'],
-  
-    heroTagline: 'Making tourism accessible for all through user-centered design',
+    description: 'A daily guessing game played with your own photo library — guess where and when each shot was taken, graded against its real metadata, all on device',
+    image: '/images/projects/shoebox-verdict.webp',
 
-    challenge: 'Tourism can be difficult to navigate for people with disabilities due to physical barriers, lack of information, and limited digital tools. Our challenge was to create a solution that empowers all travelers to explore Trieste comfortably and safely.',
+    context: 'Solo product — concept, design, and engineering',
+    role: 'Designer & iOS Engineer',
+    duration: 'Shipped — App Store ready',
+    tags: ['SwiftUI', 'iOS 18', 'Swift 6', 'PhotoKit', 'MapKit', 'Core Haptics', 'On-device'],
 
-    solution: 'We built a user-centered iOS app that provides accessible travel routes, venue information, and real-time assistance features. Through interviews and workshops with people with disabilities, we co-designed the experience to make sure every feature met real user needs.',
-  
+    heroTagline: 'Every photo is a question: where were you, and when?',
+
+    challenge: 'Photo-guessing games rely on a stock library everyone shares, so they get stale fast and never feel personal. I wanted a daily game built from your own camera roll — which means grading against real EXIF truth — without ever sending a single photo off the device.',
+
+    solution: 'Shoebox deals you a daily roll of five of your own photos. For each, you mark where on a map and set when on a film date stamp, then it grades your roll against the photo’s real location and date. The whole interface is built around the physical culture of photographs — prints with white borders, a darkroom safelight in dark mode, a press-and-hold loupe for clues, and a haptic matched to every interaction. Everything runs on device; photos never leave the phone.',
+
     gallery: [
-      { url: '/images/projects/IMG_1694.webp', caption: 'Getting to know the Problems' },
-      { url: '/images/projects/DSC_0060.webp', caption: 'Our Vision' },
-      { url: '/images/projects/DSC_0012.webp', caption: 'User Research & Co-Design Session' },
-      { url: '/images/projects/DSC_0243.webp', caption: 'Feature Testing' },
-      { url: '/images/projects/DSC_0069.webp', caption: 'App Interface' },
+      { url: '/images/projects/shoebox-verdict.webp', caption: 'Every photo is a question — guess where and when' },
+      { url: '/images/projects/shoebox-photos.webp', caption: 'A daily roll dealt from your own library' },
+      { url: '/images/projects/shoebox-map.webp', caption: 'Mark the spot, set the date, get graded' },
     ],
-  
+
     metrics: [
-      { label: 'Hackathon Ranking', value: '1st Prize', description: 'Winner of Inclusive Tourism Challenge' },
-      { label: 'User Interviews', value: '5+', description: 'Persons with disabilities consulted during research' },
-      { label: 'Accessibility Features', value: '8', description: 'Custom features co-designed with users' },
-      { label: 'App Coverage', value: 'iOS', description: 'iPhone and iPad support with SwiftUI' },
+      { label: 'Status', value: 'App Store ready', description: 'Finished build, polished end to end' },
+      { label: 'Privacy', value: '100% on-device', description: 'Photos and EXIF never leave the phone' },
+      { label: 'Stack', value: 'Swift 6', description: 'SwiftUI, iOS 18, zero third-party dependencies' },
+      { label: 'Feel', value: 'Haptic-first', description: 'Every interaction has a matched physical response' },
     ],
-  
+
     process: [
-      { title: 'USER RESEARCH', description: 'Conducted interviews and workshops with people with disabilities to understand challenges and needs' },
-      { title: 'IDEATION & CO-DESIGN', description: 'Co-created feature set with real users ensuring usability and accessibility' },
-      { title: 'APP DEVELOPMENT', description: 'Built the iOS app using SwiftUI and integrated AR navigation for accessible routes' },
-      { title: 'TESTING', description: 'Iteratively tested features with users and incorporated feedback' },
-      { title: 'PRESENTATION & WIN', description: 'Presented solution to judges and secured first prize' },
+      { title: 'CONCEPT', description: 'Framed a daily game graded against the truth in your own photo metadata' },
+      { title: 'DESIGN SYSTEM', description: 'One rule: a treatment ships only if photographs, darkrooms, or contact sheets actually work that way' },
+      { title: 'ENGINEERING', description: 'Built a deterministic daily roll, EXIF grading, and on-device persistence in SwiftUI' },
+      { title: 'HAPTICS & FEEL', description: 'Matched a distinct haptic to each interaction — the X, the date wheels, the verdict thunk' },
+      { title: 'SHIP', description: 'Polished to an App Store‑ready build with marketing screenshots' },
     ],
-  
-    feedback: {
-      quote: 'This app demonstrates what inclusive design truly means. It was inspiring to see a team work so closely with users and create a product that makes tourism accessible for everyone.',
-      author: 'Hackathon Jury – Trieste',
-      role: 'Event Judges',
-    },
-  
+
     colors: {
-      primary: '#1E4D2B',
-      secondary: '#F4F4F4',
-      accent: '#FF8C42',
+      primary: '#1A1A1A',
+      secondary: '#F4F1EA',
+      accent: '#B5341F',
     },
   },
 
   {
     id: 3,
-    slug: 'presenterpro-ai-pitch-assistant',
-    title: 'AI Pitch Assistant',
-    category: 'PRODUCTIVITY / AI',
+    slug: 'braincurve-neural-engagement',
+    title: 'BrainCurve',
+    category: 'APPLIED ML · NEUROTECH',
     year: '2025',
-    description: 'AI-powered app that ensures presenters never miss critical points during high-stakes presentations',
-    image: '/images/projects/design.webp',
-  
-    context: 'Apple Developers Academy',
-    role: 'Co-creator & iOS Developer',
-    duration: '6 weeks',
-    tags: ['iOS', 'AI', 'SwiftUI', 'AirPods', 'UX', 'Product Design'],
-  
-    heroTagline: 'Never miss a critical point with AI-driven presentation assistance',
+    description: 'Predicts second-by-second neural engagement from any video, built on Meta’s TRIBE multimodal brain-encoding model',
+    image: '/images/projects/braincurve-timeline.webp',
 
-    challenge: 'Presenters often have multiple pitch versions for different audiences. Even after extensive preparation, adrenaline and flow can cause them to skip crucial points, leaving value on the table. Existing solutions like notes, teleprompters, or memorization are either unprofessional or rigid.',
+    context: 'Solo product — research engineering to product',
+    role: 'ML & Full-stack Engineer',
+    duration: 'Working prototype',
+    tags: ['Python', 'TRIBE', 'HuBERT', 'DINOv2', 'FastAPI', 'Next.js', 'PyTorch'],
 
-    solution: 'PresenterPro acts as a silent AI partner. Users record or input their pitch, and AI identifies key points with timestamps. During practice and live presentations, the app whispers only the crucial points via AirPods at the perfect moment, helping presenters maintain flow, eye contact, and audience engagement without missing critical information.',
-  
+    heroTagline: 'Turning a video into a second-by-second map of attention, emotion, and memory',
+
+    challenge: 'Creators and researchers can measure whether a video performed, but not why — which exact moments hold attention, land emotionally, or are likely to be remembered. Existing analytics are aggregate and after-the-fact; there was no way to see engagement as a continuous signal over the timeline.',
+
+    solution: 'BrainCurve builds on Meta’s TRIBE multimodal brain-encoding model: audio (HuBERT), vision (DINOv2), and text embeddings are fused to predict per-timestep cortical responses, then distilled into attention, emotion, memory, and visual curves for any video. A FastAPI service handles upload, feature extraction, and inference; a Next.js frontend surfaces the engagement timeline, an overall score, and the strongest and weakest moments with explanations.',
+
     gallery: [
-      { url: '/images/projects/miro.webp', caption: 'Brainstorming' },
-      { url: '/images/projects/paper.webp', caption: 'Designing on Paper' },
-      { url: '/images/projects/board.webp', caption: 'On Board for Design Validation' },
-      { url: '/images/projects/design.webp', caption: 'PresenterPro iOS App Design' },
+      { url: '/images/projects/braincurve-timeline.webp', caption: 'Engagement timeline — attention, emotion, memory, and visual curves over the video' },
+      { url: '/images/projects/braincurve-dashboard.webp', caption: 'Per-metric neuro-scores with methodology' },
+      { url: '/images/projects/braincurve-moments.webp', caption: 'Key moments and a per-video breakdown' },
     ],
-  
+
     metrics: [
-      { label: 'Academy Ranking', value: 'Top 7 Presentations', description: 'Selected among cohort for seminar presentation' },
-      { label: 'Pitch Points Tracked', value: '8–12', description: 'AI identifies key moments in each presentation' },
-      { label: 'Devices Supported', value: 'iPhone + iPad + AirPods', description: 'Ensures seamless user experience' },
-      { label: 'User Engagement', value: '100% retention during practice sessions', description: 'Presenters practiced using the app consistently' },
+      { label: 'Model', value: 'TRIBE', description: 'Meta’s multimodal brain encoder, fine-tuned to the task' },
+      { label: 'Modalities', value: '3 fused', description: 'Audio (HuBERT) + vision (DINOv2) + text' },
+      { label: 'Output', value: '4 curves', description: 'Attention, emotion, memory, visual — per timestep' },
+      { label: 'Stack', value: 'End-to-end', description: 'PyTorch inference, FastAPI backend, Next.js frontend' },
     ],
-  
+
     process: [
-      { title: 'PROBLEM RESEARCH', description: 'Analyzed presenter pain points and observed real-life pitch failures' },
-      { title: 'IDEATION', description: 'Conceptualized an AI assistant that whispers key points in real-time' },
-      { title: 'PROTOTYPING', description: 'Built early iOS app prototypes and integrated AirPods audio cues' },
-      { title: 'USER TESTING', description: 'Simulated real pitch scenarios, refined timing and notifications' },
-      { title: 'FINAL PRESENTATION', description: 'Presented in seminar; app selected among Top 7 presentations in cohort' },
+      { title: 'RESEARCH', description: 'Studied TRIBE and multimodal brain encoding to map the approach to a usable product' },
+      { title: 'FEATURE PIPELINE', description: 'Built extraction with HuBERT (audio) and DINOv2 (vision) plus text embeddings' },
+      { title: 'INFERENCE ENGINE', description: 'Ran TRIBE to predict per-timestep responses, with GPU/CPU device fallback' },
+      { title: 'DISTILLATION', description: 'Turned cortical predictions into attention, emotion, memory, and visual curves' },
+      { title: 'PRODUCT', description: 'Wrapped it in a FastAPI service and a Next.js dashboard with key-moment explanations' },
     ],
-  
-    feedback: {
-      quote: 'PresenterPro demonstrates a creative, practical approach to solving a real-world presentation problem. The seamless use of AI and iOS ecosystem impressed both judges and peers.',
-      author: 'Apple Developers Academy Jury',
-      role: 'Event Judges',
-    },
-  
+
     colors: {
-      primary: '#4A90E2',
+      primary: '#1B2A4A',
       secondary: '#F4F4F4',
-      accent: '#FFC107',
+      accent: '#3D7DF2',
     },
   },
 
@@ -254,9 +239,9 @@ export const projects: ProjectData[] = [
   
     metrics: [
       { label: 'Hackathon Ranking', value: '2nd Place', description: 'NASA Space Apps Challenge – Turin' },
-      { label: 'Incubation', value: 'i3p', description: 'Awarded free incubation opportunity for further development' },
-      { label: 'Predictions Generated', value: '1000+', description: 'Historical and simulated pest outbreak predictions' },
-      { label: 'Farmer Engagement', value: '50+', description: 'Farmers tested early version and gave feedback' },
+      { label: 'Incubation', value: 'i3p', description: 'Awarded a free incubation slot for further development' },
+      { label: 'Approach', value: 'ML forecasting', description: 'Predicts outbreaks from historical crop and pest data' },
+      { label: 'Output', value: 'Risk dashboard', description: 'Risk levels, recommended actions, and alerts for farmers' },
     ],
   
     process: [
